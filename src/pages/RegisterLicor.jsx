@@ -14,7 +14,7 @@ const RegisterLic = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/ingresarLicor",
+        "https://taplibkback.onrender.com/api/ingresarLicor",
         {
             nombreLicor,
             mililitros,

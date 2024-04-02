@@ -13,7 +13,7 @@ const BarAc = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:4000/api/bars/active");
+      const response = await axios.get("https://taplibkback.onrender.com/api/bars/active");
       setBarData(response.data.bars); // Actualizar el estado con los bares activos
     } catch (error) {
       console.error("Error al obtener datos:", error);

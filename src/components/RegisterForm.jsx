@@ -23,7 +23,7 @@ const Register = () => {
       }
       const response = await axios.post(
         // "https://taplibkback.onrender.com/api/register",
-        "http://localhost:4000/api/register",
+        "https://taplibkback.onrender.com/api/register",
         {
           name,
           email,

@@ -14,7 +14,7 @@ const RegisterBar = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/registerBar",
+        "https://taplibkback.onrender.com/api/registerBar",
         {
           nombreBar,
           direccion,

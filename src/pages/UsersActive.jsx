@@ -13,7 +13,7 @@ const UsersAc = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:4000/api/users/active");
+      const response = await axios.get("https://taplibkback.onrender.com/api/users/active");
       setUserData(response.data.users); // Actualizar el estado con los usuarios activos
     } catch (error) {
       console.error("Error al obtener datos:", error);
