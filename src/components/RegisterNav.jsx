@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import logo from '../assets/images/logo-horizontal.png';
+import { useNavigate } from 'react-router-dom'; 
+import '../css/forms.css';
 
 function BarNavi() {
+  const navigate = useNavigate();
   // Estado para controlar la transparencia de la barra de navegación
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
 
@@ -13,6 +16,10 @@ function BarNavi() {
 
   const botonesStyle = {
     fontFamily: 'Roboto Mono, monospace', 
+  };
+
+  const handleLogin= () => {
+    navigate('/');
   };
 
   return (
@@ -30,7 +37,7 @@ function BarNavi() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" style={botonesStyle}>
           <Nav className="d-flex">
-            <Button variant="outline-warning" className="mr-2" style={botonesStyle} >Iniciar sesion</Button>
+            <Button variant="warning" className="mr-2 custom-button" style={botonesStyle}  onClick={handleLogin}>Iniciar sesion</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

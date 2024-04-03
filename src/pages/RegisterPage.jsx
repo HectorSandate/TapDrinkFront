@@ -2,9 +2,9 @@
 import React from 'react';
 import BarNavi from '../components/RegisterNav';
 import '../css/RegisterPage.css';
-import Carrousel from '../components/LoginCarrousel';
 import Register from '../components/RegisterForm';
 import { ToastContainer } from 'react-bootstrap';
+import imgs1 from '../assets/images/cocteles.png';
 
 
 function RegisterPage() {
@@ -18,8 +18,8 @@ function RegisterPage() {
         <ToastContainer/>
           <Register />
         </div>
-        <div className='register-carrousel-container'>
-          <Carrousel />
+        <div className='coctel-img-container'>
+          <img src={imgs1} alt="coctel" className='coctel-img'/>
         </div>
       </div>
     </>

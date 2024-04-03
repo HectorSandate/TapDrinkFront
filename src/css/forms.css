@@ -1,0 +1,34 @@
+
+  .custom-button:hover {
+    background-color: transparent !important;
+    border-color: #ffc107 !important;
+    color: #ffc107 !important;
+  }
+  
+  .card-text-style {
+    color: #ffffff;
+    font-family: "Roboto Mono", monospace;
+    font-size: 20px;
+  }
+  
+  .separator-style {
+    margin: 20px 0;
+    color: #808080;
+  }
+  
+  .register-text-style {
+    color: #ffffff;
+    font-family: "Roboto Mono", monospace;
+    font-size: 16px;
+  }
+  
+  .link-style {
+    color: #ffff00;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .link-style:hover {
+    color: #ffc107;
+  }
+  

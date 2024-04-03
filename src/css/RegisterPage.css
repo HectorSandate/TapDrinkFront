@@ -19,15 +19,17 @@
     bottom: 0;
   }
   
-  /* Estilo del contenedor del carrusel de inicio de sesión */
-  .register-carrousel-container {
-    position: absolute;
-    width: 620px;
-    top: 14%;
-    right: 0;
-    left: 10%;
-    bottom: 20%;
+  .coctel-img-container {
+    position: relative;
+    top: 12%;
+    left: 9%;
   }
+  
+  .coctel-img{
+    width: 800px;
+    height: 600px;
+  }
+  
   
   /* Estilo para un fondo negro con texto blanco */
   .black-background {

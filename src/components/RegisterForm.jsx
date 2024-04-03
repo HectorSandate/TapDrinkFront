@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Card, Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-
 import axios from "axios";
-
+import '../css/forms.css';
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -22,7 +21,6 @@ const Register = () => {
         return;
       }
       const response = await axios.post(
-        // "https://taplibkback.onrender.com/api/register",
         "https://taplibkback.onrender.com/api/register",
         {
           name,
@@ -31,7 +29,7 @@ const Register = () => {
         }
       );
       console.log("Respuesta del servidor:", response.data);
-      toast.success('Se registro correctamente');
+      toast.success('Se registró correctamente');
       navigate("/");
     } catch (error) {
       console.error("Error al registrarse:", error);
@@ -47,37 +45,15 @@ const Register = () => {
       }
     }
   };
-  
-   const cardHeaderStyle = {
+
+  const headerStyle = {
     color: '#FFF711',
     fontFamily: 'Roboto Mono, monospace',
     fontSize: '30px',
   };
 
-  const cardTextStyle = {
-    color: '#FFFFFF',
-    fontFamily: 'Roboto Mono, monospace', 
-    fontSize: '20px',
-  };
-
   const buttonStyle = {
-    fontFamily: 'Roboto Mono, monospace', 
-  };
-  const separatorStyle = {
-    margin: '20px 0',
-    color: '#808080',
-  };
-
-  const registerTextStyle = {
-    color: '#FFFFFF',
-    fontFamily: 'Roboto Mono, monospace', 
-    fontSize: '16px',
-  };
-
-  const linkStyle = {
-    color: '#FFFF00', 
-    textDecoration: 'underline', 
-    cursor: 'pointer',
+    fontFamily: 'Roboto Mono, monospace',
   };
 
   return (
@@ -94,81 +70,61 @@ const Register = () => {
         pauseOnHover
         theme="dark"
       />
-        <Card className="col-md-4" style={{ background: 'black' }}>
-      <Card.Header className="text-center" style={cardHeaderStyle}>TapDrink</Card.Header>
-      <Card.Text className="text-center" style={cardTextStyle}>
-        Welcome Back!
-      </Card.Text>
-      <Card.Body>
-        <Form onSubmit={handleSubmit}>
-          <FloatingLabel
-            controlId="floatingName"
-            label="Name"
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </FloatingLabel>
+      <Card className="col-md-4" style={{ background: 'black' }}>
+        <Card.Header className="text-center"  style={headerStyle}>TapDrink</Card.Header>
+        <Card.Text className="text-center card-text-style">Welcome Back!</Card.Text>
+        <Card.Body>
+          <Form onSubmit={handleSubmit}>
+            <FloatingLabel controlId="floatingName" label="Name" className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FloatingLabel>
 
-          {/* Campo para el email */}
-          <FloatingLabel
-            controlId="floatingEmail"
-            label="Email"
-            className="mb-3"
-          >
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </FloatingLabel>
+            <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FloatingLabel>
 
-          {/* Campo para la contraseña */}
-          <FloatingLabel 
-            controlId="floatingPassword" 
-            label="Password"
-            className="mb-3"
-          >
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </FloatingLabel>
+            <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FloatingLabel>
 
-          <FloatingLabel controlId="confirmPassword" label="Confirmar Password">
-            <Form.Control
-              type="password"
-              placeholder="Confirmar Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </FloatingLabel>
+            <FloatingLabel controlId="confirmPassword" label="Confirmar Password">
+              <Form.Control
+                type="password"
+                placeholder="Confirmar Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </FloatingLabel>
 
-          <br />
-          <Button style={buttonStyle} className="col-md-12" variant="outline-warning" type="submit">
-            Registrarse
-          </Button>
-        </Form>
-        <hr style={separatorStyle} />
+            <br />
+            <Button className="col-md-12 custom-button" style={buttonStyle} variant="warning" type="submit">
+              Registrarse
+            </Button>
+          </Form>
+          <hr className="separator-style" />
 
-        <div className="text-center" style={registerTextStyle}>
-          Ya tienes una cuenta?
-        </div>
+          <div className="text-center register-text-style">Ya tienes una cuenta?</div>
 
-        <div className="text-center">
-          <Link to="/" style={linkStyle}>
-            Inicia sesion aquí
-          </Link>
-        </div>
-      </Card.Body>
-    </Card>
+          <div className="text-center">
+            <Link to="/" className="link-style">Inicia sesión aquí</Link>
+          </div>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
