@@ -1,9 +1,10 @@
 // LoginPage.js
-import React from 'react';
-//import BarNavi from '../components/HomeNav';
-import '../css/HomePage.css';
-import { Link} from "react-router-dom";
-// import BebidaFormulario from '../components/HomeSearch';
+
+import React from "react";
+import BarNavi from "../components/HomeNav";
+import "../css/HomePage.css";
+import { Link } from "react-router-dom";
+import BebidaFormulario from "../components/HomeSearch";
 // import HomeCarrousel from '../components/HomeCarousel';
 
 const linkStyle = {
@@ -11,20 +12,24 @@ const linkStyle = {
   textDecoration: "underline",
   cursor: "pointer",
   fontFamily: "Roboto Mono, monospace",
-    fontSize: "16px",
+  fontSize: "16px",
 };
 
 function HomePage() {
   return (
     <>
-      {/* <div className='bar-navigator-container'>
+      <div className="bar-navigator-container ">
         <BarNavi />
-      </div> */}
-      <div className='home-page-container black-background'>
-        {/* <div className='search-page'>
-              <BebidaFormulario />
-        </div>
-        <HomeCarrousel /> */}
+      </div>
+      <div className="home-page-container black-background">
+
+
+
+          <div className="search-page">
+            <BebidaFormulario />
+          </div>
+
+
         <div className="text-center mt-48">
           <Link to="/users/active" style={linkStyle}>
             Ver usuarios activos

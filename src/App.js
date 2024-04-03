@@ -8,6 +8,7 @@ import UsersAc from './pages/UsersActive';
 import RegisterBar from './pages/RegisterBar';
 import BarAc from './pages/BarActive';
 import RegisterLic from './pages/RegisterLicor';
+import UserPage from './components/usuarioInformacionComponente';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
 
         <Route path="/recetas" element={<Home />} />
         <Route path="/recetas/active" element={<Home />} />
+
+        <Route path="/userPage" element={<UserPage />} />
+        <Route path="/usuario/active" element={<Home />} />
         </Routes>
       </Router>
     </div>
