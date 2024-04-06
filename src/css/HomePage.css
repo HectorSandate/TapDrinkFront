@@ -1,39 +1,31 @@
-
-/* Estilo del contenedor principal */
 .home-page-container {
     display: block;
     height: 100vh;
-    overflow: hidden; /* Evita el desbordamiento de contenido */
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
-    
-  /* Estilo para un fondo negro con texto blanco */
   .black-background {
     background-color: black;
     color: white;
   }
-  
-  /* Estilo para el contenedor del BarNavigator */
   .bar-navigator-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
   }
-
-.search-page{
-    margin-top: 130px ;
-    margin-left: 220px;
-}
-
-.search-title{
-    font-size: 35px;
-    margin-left: 22%;
-    margin-bottom: 20px;
-    
-}
-
-.search-subtitle{
-    font-size: 20px;
-    margin-left: 25%;
-    margin-bottom: 40px;
-}
+  .search-page{
+      margin-top: 130px ;
+      margin-left: 220px;
+  }
+  .search-title{
+      font-size: 35px;
+      margin-left: 22%;
+      margin-bottom: 20px;
+      
+  }
+  .search-subtitle{
+      font-size: 20px;
+      margin-left: 25%;
+      margin-bottom: 40px;
+  }

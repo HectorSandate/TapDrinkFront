@@ -1,0 +1,29 @@
+.inputs-style{
+    color: #000000;
+    box-shadow: 2px 2px 2px #ffc107b7 ;
+    border-color: gray;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+.title-style{
+    font-family: 'Roboto Mono', bold;
+    font-size: 20px; 
+}
+
+.delete-button:hover{
+    background-color: transparent !important;
+    border-color: #DC3545 !important;
+    color: #DC3545!important;
+}
+
+.add-button:hover{
+    background-color: transparent  !important;
+    border-color: #0DCAF0 !important;
+    color: #0DCAF0 !important;
+}
+
+.post-button:hover{
+    background-color: transparent !important;
+    border-color: #198754 !important;
+    color: #198754 !important;
+}
