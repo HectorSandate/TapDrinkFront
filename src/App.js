@@ -10,6 +10,7 @@ import BarAc from './pages/BarActive';
 import RegisterLic from './pages/RegisterLicor';
 import UserPage from './components/usuarioInformacionComponente';
 import RecetaForm from './pages/postReceta';
+import Principal from './pages/PaginaPrincipal'
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
         <Route path="/usuario/active" element={<Home />} />
 
         <Route path="/recetas" element={<RecetaForm />} />
+        <Route path="/usuario/active" element={<Home />} />
+
+
+        <Route path="/Principal" element={<Principal />} />
         <Route path="/usuario/active" element={<Home />} />
         </Routes>
       </Router>
