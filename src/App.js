@@ -9,6 +9,7 @@ import RegisterBar from './pages/RegisterBar';
 import BarAc from './pages/BarActive';
 import RegisterLic from './pages/RegisterLicor';
 import UserPage from './components/usuarioInformacionComponente';
+import RecetaForm from './pages/postReceta';
 
 function App() {
   return (
@@ -26,10 +27,10 @@ function App() {
         <Route path="/ingresarLicor" element={<RegisterLic />} />
         <Route path="/licores/active" element={<Home />} />
 
-        <Route path="/recetas" element={<Home />} />
-        <Route path="/recetas/active" element={<Home />} />
-
         <Route path="/userPage" element={<UserPage />} />
+        <Route path="/usuario/active" element={<Home />} />
+
+        <Route path="/recetas" element={<RecetaForm />} />
         <Route path="/usuario/active" element={<Home />} />
         </Routes>
       </Router>
