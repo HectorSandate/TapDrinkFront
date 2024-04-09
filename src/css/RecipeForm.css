@@ -4,6 +4,13 @@
     border-color: gray;
     font-family: 'Roboto Mono', monospace; 
 }
+.img-style{
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 2px 2px 2px #ffc107b7 ;
+    border-color: gray;
+    font-family: 'Roboto Mono', monospace; 
+}
 
 .title-style{
     font-family: 'Roboto Mono', bold;
