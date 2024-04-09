@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
 import BarNavi from "../components/HomeNav";
 import RecipeCard from '../components/RecipeCard'; // Importa el componente RecipeCard
-import "../css/HomePage.css";
+import "../css/recipeDetails.css";
+import { useParams } from "react-router-dom";
 
 function RecipeDetail() {
-  const [recipe, setRecipe] = useState(null); // Cambiado de array a objeto único
-  const recipeId = "your_recipe_id_here"; // ID de la receta deseada
+  const { id } = useParams(); // Obtener el ID de la receta de los parámetros de la ruta
+  const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    fetch(`https://taplibkback.onrender.com/api/recetas/active/${recipeId}`) // Modificado para obtener solo la receta con el ID específico
+    fetch(`https://taplibkback.onrender.com/api/recetas/active/${id}`)
       .then(response => response.json())
       .then(data => {
         console.log("Data from API:", data);
-        setRecipe(data); // Establecer la receta obtenida del backend
+        setRecipe(data);
       })
       .catch(error => console.error("Error fetching recipe:", error));
-  }, [recipeId]);
+  }, [id]); // Asegúrate de que useEffect se ejecute cada vez que cambie el ID
+
 
   return (
     <>
       <div className="bar-navigator-container">
         <BarNavi />
       </div>
-      <div className="details-page-container black-background">
+      <div className="home-page-container black-background">
         <div className="container">
           <div className="row">
             {recipe && // Verificar si la receta está cargada antes de mostrarla
-              <div className="col-md-12 recipe-card">
+              <div className="col-md-12 ">
                 <RecipeCard recipe={recipe} />
               </div>
             }
