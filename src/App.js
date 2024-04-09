@@ -7,10 +7,11 @@ import Home from './pages/HomePage';
 import UsersAc from './pages/UsersActive';
 import RegisterBar from './pages/RegisterBar';
 import BarAc from './pages/BarActive';
-import RegisterLic from './pages/RegisterLicor';
+// import RegisterLic from './pages/RegisterLicor';
 import UserPage from './components/usuarioInformacionComponente';
 import RecetaForm from './pages/postReceta';
 import Principal from './pages/PaginaPrincipal'
+import LicorFormPopover from './pages/registroLicorzz'
 
 function App() {
   return (
@@ -25,8 +26,8 @@ function App() {
         <Route path="/registerBar" element={<RegisterBar />} />
         <Route path="/bars/active" element={<BarAc />} />
 
-        <Route path="/ingresarLicor" element={<RegisterLic />} />
-        <Route path="/licores/active" element={<Home />} />
+        {/* <Route path="/ingresarLicor" element={<RegisterLic />} />
+        <Route path="/licores/active" element={<Home />} /> */}
 
         <Route path="/userPage" element={<UserPage />} />
         <Route path="/usuario/active" element={<Home />} />
@@ -37,6 +38,11 @@ function App() {
 
         <Route path="/Principal" element={<Principal />} />
         <Route path="/usuario/active" element={<Home />} />
+
+        <Route path="/licores" element={<LicorFormPopover />} />
+        <Route path="/usuario/active" element={<Home />} />
+
+        
         </Routes>
       </Router>
     </div>

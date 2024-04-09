@@ -1,5 +1,5 @@
 import React from "react";
-import imagen2 from "../../assets/images/Pagina Principal/hero.gif"; // Ruta de la imagen de fondo
+import imagen2 from "../../assets/images/Pagina Principal/hero2.gif"; // Ruta de la imagen de fondo
 
 const PaymentComponent = () => {
   return (
@@ -11,7 +11,7 @@ const PaymentComponent = () => {
         backgroundPosition: "center",
         width: "100vw",
         height: "100vh",
-        position: "fixed",
+        
         top: 0,
         left: 0,
       }}
