@@ -31,7 +31,7 @@ const Sepa = () => {
       <div className="container mx-auto px-6 py-12 text-center">
         <Slider ref={sliderRef} {...settings}>
           <div>
-            <h2 className="text-4xl font-bold text-gray-800 mb-2">No sabo</h2>
+            <h2 className="text-4xl font-bold text-gray-800 mb-2">Testimonio Bar Alan</h2>
             <span className="block w-20 h-1 bg-yellow-500 mx-auto mb-8"></span>
             <img src="/images/bebidas.png" alt="About" className="mx-auto mb-8" style={{ maxWidth: '300px' }} />
             <p className="text-gray-600 text-lg mb-8">
@@ -39,7 +39,7 @@ const Sepa = () => {
             </p>
           </div>
           <div>
-            <h2 className="text-4xl font-bold text-gray-800 mb-2">Idonou</h2>
+            <h2 className="text-4xl font-bold text-gray-800 mb-2">Testimonio Bar Alan</h2>
             <span className="block w-20 h-1 bg-yellow-500 mx-auto mb-8"></span>
             <img src="/images/bebidas.png" alt="About" className="mx-auto mb-8" style={{ maxWidth: '300px' }} />
             <p className="text-gray-600 text-lg mb-8">
