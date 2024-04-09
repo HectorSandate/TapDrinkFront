@@ -44,4 +44,10 @@
     border-color: #DC3545 !important;
     color: #DC3545 !important;
 }
-  
+
+.recipe-image {
+    width: 250px; /* Ancho deseado */
+    height: 230px; /* Altura deseada */
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin perder las proporciones */
+    border-radius: 5px; /* (Opcional) Agrega bordes redondeados si deseas */
+}

@@ -1,15 +1,30 @@
 // RecipeCard.js
-import React from 'react';
+import React, { useState } from 'react';
 
-function RecipeCard({ imageUrl, title, description, onClick }) {
+function RecipeCard({ recipeId, imageUrl, title, description, onDelete , onClick}) {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+
+  const togglePopover = () => setIsPopoverOpen(!isPopoverOpen); 
 
   return (
-    <div className="card">
-      <img src={imageUrl} className="card-img-top" alt="Recipe" />
+    <div className="card relative">
+      <img src={imageUrl} className="card-img-top recipe-image" alt="Recipe" />
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
-        <button className="btn btn-primary" onClick={onClick}>Ver receta</button>
+        <button className="btn btn-primary" onClick={() => onClick(recipeId)}>Ver receta</button>
+        {/* Botón para eliminar */}
+        <button className="btn btn-danger ml-2" onClick={togglePopover}>Eliminar</button>
+        {/* Popover de Tailwind */}
+        {isPopoverOpen && (
+          <div className="absolute z-10 w-44 bg-white shadow-lg rounded-lg right-0 mt-2">
+            <div className="p-4 flex flex-col">
+              <button className="btn btn-secondary mb-2" onClick={() => onDelete(recipeId, 'temporary')}>Baja Temporal</button>
+              <button className="btn btn-danger" onClick={() => onDelete(recipeId, 'permanent')}>Baja Permanente</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
