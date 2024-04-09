@@ -7,7 +7,7 @@ import User from './pages/user.info';
 import RegisterRecipe from './pages/RegisterRecipe';
 import RecipeDetail from './pages/RecipeDetail';
 import Principal from './pages/PaginaPrincipal'
-
+import ModificarRecetaForm from './pages/modifcarReceta'
 function App() {
   return (
     <div className="app">
@@ -20,6 +20,7 @@ function App() {
         <Route path="/recetas" element={<RegisterRecipe />} />
         <Route path="/detallesReceta/:id" element={<RecipeDetail />} />
         <Route path="/principal" element={<Principal />} />
+        <Route path="/modificarReceta/:recipeId" element={<ModificarRecetaForm />} />
         </Routes>
       </Router>
     </div>
