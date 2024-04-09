@@ -1,8 +1,7 @@
 import React from "react";
 import BarNavi from "../components/HomeNav";
-
-import '../css/userPage.css';
-import UserPage from "../components/usuarioInformacion";
+import "../css/HomePage.css";
+import RecetaForm from "../components/RecipeForm";
 
 
 function RegisterRecipe() {
@@ -12,9 +11,9 @@ function RegisterRecipe() {
       <div className="bar-navigator-container ">
         <BarNavi />
       </div>
-      <div className="user-page-container black-background">
-          <div className="card-user">
-              <UserPage />
+      <div className="home-page-container black-background">
+          <div className="search-page">
+            <RecetaForm />
           </div>
       </div>
     </>

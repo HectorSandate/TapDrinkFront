@@ -1,0 +1,47 @@
+.pfp-user{
+    width: 250px;
+    height: 230px;
+}
+.user-header{
+    position: relative;
+    border-color: #424242;
+    left: 37%;
+    top: 5%;
+    width: 250px;
+    height: 230px;
+}
+.user-style{
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px #ffc107;
+    border-radius: 5px;
+    border-color: #ffc107;
+    width: 900px;
+    height: 500px;
+}
+.user-body{
+    position: relative;
+    top: 10%;
+    height: 220px;
+    color: #000;
+    font-size: 25px;
+}
+
+.button-data{
+    box-shadow: 5px 5px 10px black;
+}
+.button-log{
+    box-shadow: 5px 5px 10px black;
+    margin-left: 50px;
+}
+.button-data:hover {
+    background-color: transparent !important;
+    border-color: #0DCAF0 !important;
+    
+    color: #0DCAF0 !important;
+}
+.button-log:hover {
+    background-color: transparent !important;
+    border-color: #DC3545 !important;
+    color: #DC3545 !important;
+}
+  

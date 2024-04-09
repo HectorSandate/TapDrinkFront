@@ -1,0 +1,17 @@
+[33mcommit 19396d5ef334caadd2ce0b538c0383b6a0c69dc9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/pruebas[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mpruebas[m[33m)[m
+Author: hector04perez <hector_3041220197@utd.edu.mx>
+Date:   Tue Apr 2 19:50:46 2024 -0600
+
+    cambios en el css de login y register
+
+[33mcommit 7c37002a4520e5bb5e693d851cb06a770906e804[m
+Author: Héctor José Díaz Sandate <hectorjosediazsandate@gmail.com>
+Date:   Tue Apr 2 17:18:40 2024 -0600
+
+    coneccion server
+
+[33mcommit e2b0ef0cdb3a5ef697fda4168453099d534aec98[m
+Author: Héctor José Díaz Sandate <hectorjosediazsandate@gmail.com>
+Date:   Tue Apr 2 16:55:32 2024 -0600
+
+    Front

@@ -1,0 +1,19 @@
+.details-page-container {
+    display: block;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .black-background {
+    background-color: black;
+    color: white;
+  }
+  .bar-navigator-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+.recipe-card{
+    top: 10%;
+}

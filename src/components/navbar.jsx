@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate de react-router-dom
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo-horizontal.png';
 import '../css/forms.css';
 
 function BarNavigator() {
-  const navigate = useNavigate(); // Obtén la función de navegación
+  const navigate = useNavigate();
 
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
 

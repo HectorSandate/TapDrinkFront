@@ -1,6 +1,31 @@
 .logoStyle{
-    width: 180px;
-    height: 70px;
-    margin-left: 450px;
+    width: 160px;
+    height: 60px;
 }
+.offcanvas-body {
+    background-color: #ffc107b7 ;
+    color: #ffffff;
+    font-family: "Roboto Mono", monospace;
+    font-size: 20px;
+  }
 
+  .offcanvas-header {
+    background-color: #ffc107 ;
+    color: #363636;
+    font-family: "Roboto Mono", monospace;
+    font-size: 25px;
+  }
+
+  .color-toggle{
+    margin-right: 10px;
+  }
+
+  .color-toggle:hover{
+    background-color: #ffc107;
+  }
+
+  .nav-link:hover{
+    background-color: #ffc107;
+    font-size: 24px;
+    transition: ease-in;
+  }

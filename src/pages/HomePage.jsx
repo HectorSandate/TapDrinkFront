@@ -1,72 +1,60 @@
-// LoginPage.js
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BarNavi from "../components/HomeNav";
 import "../css/HomePage.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import BebidaFormulario from "../components/HomeSearch";
-// import HomeCarrousel from '../components/HomeCarousel';
-
-const linkStyle = {
-  color: "grey",
-  textDecoration: "underline",
-  cursor: "pointer",
-  fontFamily: "Roboto Mono, monospace",
-  fontSize: "16px",
-};
+import RecipeCard from '../components/Recipe';
 
 function HomePage() {
+  const navigate = useNavigate();
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    fetch("https://taplibkback.onrender.com/api/recetas/active")
+      .then(response => response.json())
+      .then(data => {
+        console.log("Data from API:", data);
+        if (Array.isArray(data.recetas)) {
+          setRecipes(data.recetas);
+        } else {
+          console.error("Recetas array not found in data:", data);
+        }
+      })
+      .catch(error => console.error("Error al traer las recetas:", error));
+  }, []);
+
+  const handleRecipeClick = (recipeId) => {
+    navigate(`/detallesReceta/${recipeId}`);
+  };
+
+  if (recipes.length === 0) {
+    return <p>Cargando...</p>;
+  }
+
   return (
     <>
       <div className="bar-navigator-container ">
         <BarNavi />
       </div>
       <div className="home-page-container black-background">
-
-
-
           <div className="search-page">
             <BebidaFormulario />
           </div>
-
-
-        <div className="text-center mt-48">
-          <Link to="/users/active" style={linkStyle}>
-            Ver usuarios activos
-          </Link>
+          <div className="container">
+            <div className="row">
+              {recipes.map((recipe) => (
+                <div className="col-md-4" key={recipe._id}>
+                  <RecipeCard
+                    imageUrl={recipe.image.secure_url}
+                    title={recipe.nombre}
+                    onClick={() => handleRecipeClick(recipe._id)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="text-center">
-          <Link to="/registerBar" style={linkStyle}>
-            Registrar un bar
-          </Link>
-        </div>
-        <div className="text-center">
-          <Link to="/bars/active" style={linkStyle}>
-            Ver bares activos
-          </Link>
-        </div>
-        {/* <div className="text-center">
-          <Link to="/ingresarLicor" style={linkStyle}>
-            Registrar un licor
-          </Link>
-        </div>
-        <div className="text-center">
-          <Link to="/licores/active" style={linkStyle}>
-            Ver licores activos
-          </Link>
-        </div>
-        <div className="text-center">
-          <Link to="/recetas" style={linkStyle}>
-            Registrar receta
-          </Link>
-        </div>
-        <div className="text-center">
-          <Link to="/recetas/active" style={linkStyle}>
-            Ver recetas activas
-          </Link>
-        </div> */}
-      </div>
-    </>
+      </>
   );
 }
 
