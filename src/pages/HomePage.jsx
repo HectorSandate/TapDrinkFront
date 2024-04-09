@@ -47,7 +47,7 @@ function HomePage() {
                   <RecipeCard
                     imageUrl={recipe.image.secure_url}
                     title={recipe.nombre}
-                    onClick={() => handleRecipeClick(recipe._id)}
+                    onClick={() => handleRecipeClick(recipe._id)} // Pasar el ID de la receta al hacer clic
                   />
                 </div>
               ))}
