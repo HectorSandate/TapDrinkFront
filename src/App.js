@@ -6,18 +6,21 @@ import Home from './pages/HomePage';
 import User from './pages/user.info';
 import RegisterRecipe from './pages/RegisterRecipe';
 import RecipeDetail from './pages/RecipeDetail';
+import Principal from './pages/PaginaPrincipal';
 
 function App() {
   return (
     <div className="app">
       <Router>
         <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Principal />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/user" element={<User />} />
         <Route path="/recetas" element={<RegisterRecipe />} />
         <Route path="/detallesReceta/:id" element={<RecipeDetail />} />
+        <Route path="/updateReceta/:id" element={<RecipeDetail />} />       
         </Routes>
       </Router>
     </div>
