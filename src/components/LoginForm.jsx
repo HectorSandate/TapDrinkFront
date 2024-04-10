@@ -1,37 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "../css/forms.css";
+import { UserContext } from "./context/UserContext";
 
 const Login = () => {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://taplibkback.onrender.com/api/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("https://taplibkback.onrender.com/api/login", {
+        email,
+        password,
+      });
       console.log("Respuesta del servidor:", response.data);
-      toast.success('Incio de sesion exitoso');
+      setUser(response.data.user); // Asegúrate de que la respuesta contenga los datos del usuario
+      toast.success("Inicio de sesión exitoso");
       navigate("/home");
     } catch (error) {
-      console.error("Error al logearse:", error);
+      console.error("Error al iniciar sesión:", error);
       if (error.response) {
         const { status, data } = error.response;
         if (status === 401) {
           toast.error(data.message);
         } else {
-          toast.error("Error al logearse. Por favor, verifica tus datos.");
+          toast.error(
+            "Error al iniciar sesión. Por favor, verifica tus datos."
+          );
         }
       } else {
         toast.error("Error al comunicarse con el servidor.");

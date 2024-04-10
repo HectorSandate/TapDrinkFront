@@ -1,0 +1,60 @@
+/* Estilos existentes */
+.inputs-style{
+    color: #000000;
+    box-shadow: 2px 2px 2px #ffc107b7;
+    border-color: gray;
+    font-family: 'Roboto Mono', monospace;
+    border-radius: 20px; /* Bordes redondeados */
+}
+
+.img-style{
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 2px 2px 2px #ffc107b7;
+    border-color: gray;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.title-style{
+    font-family: 'Roboto Mono', bold;
+    font-size: 20px;
+    color: white; /* Letras blancas */
+}
+
+.delete-button:hover, .add-button:hover, .post-button:hover{
+    background-color: transparent !important;
+    border-color: #DC3545 !important;
+    color: #DC3545!important;
+}
+
+.add-button:hover{
+    border-color: #0DCAF0 !important;
+    color: #0DCAF0 !important;
+}
+
+.post-button:hover{
+    border-color: #198754 !important;
+    color: #198754 !important;
+}
+
+/* Estilos nuevos para el contenedor del formulario */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black; /* Fondo negro */
+}
+
+.form-box {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px; /* Contenedor del formulario redondeado */
+    background-color: #212529; /* Fondo oscuro para el formulario */
+}
+
+/* Estilos adicionales para los inputs ahora son blancos */
+.inputs-style, .title-style {
+    color: white !important;
+    background-color: transparent;
+}

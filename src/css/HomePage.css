@@ -1,31 +1,32 @@
 .home-page-container {
-    display: block;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
-  .black-background {
-    background-color: black;
-    color: white;
-  }
-  .bar-navigator-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-  .search-page{
-      margin-top: 130px ;
-      margin-left: 220px;
-  }
-  .search-title{
-      font-size: 35px;
-      margin-left: 22%;
-      margin-bottom: 20px;
-      
-  }
-  .search-subtitle{
-      font-size: 20px;
-      margin-left: 25%;
-      margin-bottom: 40px;
-  }
+  display: block;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.black-background {
+  background-image: url('../assets/images/fondos/2.png');
+  background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+  background-position: center; /* Centra la imagen */
+}
+.bar-navigator-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.search-page{
+    margin-top: 130px ;
+    margin-left: 220px;
+}
+.search-title{
+    font-size: 35px;
+    margin-left: 22%;
+    margin-bottom: 20px;
+    
+}
+.search-subtitle{
+    font-size: 20px;
+    margin-left: 25%;
+    margin-bottom: 40px;
+}

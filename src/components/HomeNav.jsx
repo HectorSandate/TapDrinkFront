@@ -39,6 +39,7 @@ const HomeBar = () => {
               <Nav.Link href="/home">Inicio</Nav.Link>
               <Nav.Link href="/user">Perfil</Nav.Link>
               <Nav.Link href="/recetas">Ingresar Receta</Nav.Link>
+              <Nav.Link href="/profile">Ingresar Receta</Nav.Link>
               <Nav.Link href="/">Log out</Nav.Link>
               {/* <NavDropdown
                 title="Dropdown"
