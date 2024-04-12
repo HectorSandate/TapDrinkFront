@@ -18,6 +18,7 @@ import Inactive from './pages/Inactive';
 import RegisterLicor from './pages/RegisterLicor';
 import Licores from './pages/LicorPage';
 import LicorDetail from './pages/LicorDetail';
+import ModificarLicorForm from './pages/modificarLicor';
 
 function App() {
   return (
@@ -41,8 +42,10 @@ function App() {
         <Route path="/agregarLicor" element={<RegisterLicor />} />
         <Route path="/verLicor" element={<Licores />} />
         <Route path="/detallesLicor/:id" element={<LicorDetail />} />
+        <Route path="/editLicor/:licorId" element={<ModificarLicorForm />} />
 
         <Route path="/profile" element={<Profile />} />
+
         </Routes>
       </Router>
       </UserProvider>

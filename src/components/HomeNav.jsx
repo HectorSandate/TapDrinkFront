@@ -37,9 +37,7 @@ const HomeBar = () => {
           <Offcanvas.Body className="offcanvas-body">
             <Nav className="justify-content-end flex-grow-1 pe-3">
               <Nav.Link href="/home">Inicio</Nav.Link>
-              <Nav.Link href="/user">Perfil</Nav.Link>
               <Nav.Link href="/recetas">Ingresar Receta</Nav.Link>
-              <Nav.Link href="/profile">Pruebas</Nav.Link>
               <Nav.Link href="/inactivos">Inactivos</Nav.Link>
                  <NavDropdown
                     title="Licor"
@@ -47,8 +45,8 @@ const HomeBar = () => {
                   >
                     <NavDropdown.Item href="/agregarLicor">Agregar Licor</NavDropdown.Item>
                     <NavDropdown.Item href="/verLicor">Ver Licores</NavDropdown.Item>
-                    <NavDropdown.Item href="/modificarLicor">Editar Licor</NavDropdown.Item>
                   </NavDropdown>
+              <Nav.Link href="/user">Perfil</Nav.Link>
               <Nav.Link href="/">Log out</Nav.Link>            
             </Nav>
           </Offcanvas.Body>

@@ -14,13 +14,13 @@ function RecetaForm() {
   });
 
   // Nuevo estado para almacenar licores
-  const [licores, setLicores] = useState([]);
+  const [licores, setLicor] = useState([]);
 
   // Cargar licores al montar el componente
   useEffect(() => {
     fetch("https://taplibkback.onrender.com/api/licores/active")
       .then((response) => response.json())
-      .then((data) => setLicores(data.licores))
+      .then((data) => setLicor(data.licor))
       .catch((error) => console.error("Error al cargar licores:", error));
   }, []);
 
@@ -144,8 +144,6 @@ function RecetaForm() {
               onChange={(e) => handleStepChange(index, e)}
               className="px-3 py-2 rounded-md inputs-style"
             />
-
-            {/* Cambiado de <input> a <select> */}
             <select
               name="licor"
               value={paso.licor}
