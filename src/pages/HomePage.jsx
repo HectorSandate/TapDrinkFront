@@ -27,9 +27,9 @@ function HomePage() {
     navigate(`/detallesReceta/${recipeId}`);
   };
 
-  const handleEdit = (recipeId) => {
-    navigate(`/editReceta/${recipeId}`);
-  };  
+  // const handleEdit = (recipeId) => {
+  //   navigate(`/editReceta/${recipeId}`);
+  // };  
 
   const handleDelete = (recipeId, type) => {
     if (type === "temporary") {
@@ -75,7 +75,7 @@ function HomePage() {
                   description={recipe.duracion} // o cualquier otra propiedad para 'description'
                   onClick={handleRecipeClick}
                   onDelete={handleDelete}
-                  onEdit={handleEdit} // Pasar la función de eliminación
+                  // onEdit={handleEdit} // Pasar la función de eliminación
                 />
               </div>
             ))}

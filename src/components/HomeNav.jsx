@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Navbar, Container, Nav, Image} from "react-bootstrap";
+import { Navbar, Container, Nav, Image, NavDropdown} from "react-bootstrap";
 //, Button, NavDropdown, Form
 import logo from '../assets/images/logo-horizontal.png';
 import { ReactComponent as MenuIcon } from '../assets/icons/menu.svg';
@@ -39,31 +39,18 @@ const HomeBar = () => {
               <Nav.Link href="/home">Inicio</Nav.Link>
               <Nav.Link href="/user">Perfil</Nav.Link>
               <Nav.Link href="/recetas">Ingresar Receta</Nav.Link>
-              <Nav.Link href="/profile">Ingresar Receta</Nav.Link>
-              <Nav.Link href="/">Log out</Nav.Link>
-              {/* <NavDropdown
-                title="Dropdown"
-                id={`offcanvasNavbarDropdown-expand-false`}
-              >
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown> */}
+              <Nav.Link href="/profile">Pruebas</Nav.Link>
+              <Nav.Link href="/inactivos">Inactivos</Nav.Link>
+                 <NavDropdown
+                    title="Licor"
+                    id={`offcanvasNavbarDropdown-expand-false`}
+                  >
+                    <NavDropdown.Item href="/agregarLicor">Agregar Licor</NavDropdown.Item>
+                    <NavDropdown.Item href="/verLicor">Ver Licores</NavDropdown.Item>
+                    <NavDropdown.Item href="/modificarLicor">Editar Licor</NavDropdown.Item>
+                  </NavDropdown>
+              <Nav.Link href="/">Log out</Nav.Link>            
             </Nav>
-            {/* <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form> */}
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

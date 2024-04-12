@@ -1,17 +1,24 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './pages/LoginPage';
-import Register from './pages/RegisterPage';
-import Home from './pages/HomePage';
-import User from './pages/user.info';
-import RegisterRecipe from './pages/RegisterRecipe';
-import RecipeDetail from './pages/RecipeDetail';
-import Principal from './pages/PaginaPrincipal'
-import ModificarRecetaForm from './pages/modifcarReceta'
-import Inactive from './pages/Inactive'
 
 import Profile from './components/Profile';
 import { UserProvider } from "./components/context/UserContext";
+
+import Login from './pages/LoginPage';
+import Register from './pages/RegisterPage';
+import Home from './pages/HomePage';
+import Principal from './pages/PaginaPrincipal';
+import User from './pages/user.info';
+
+import RegisterRecipe from './pages/RegisterRecipe';
+import RecipeDetail from './pages/RecipeDetail';
+import ModificarRecetaForm from './pages/modifcarReceta';
+import Inactive from './pages/Inactive';
+
+import RegisterLicor from './pages/RegisterLicor';
+import Licores from './pages/LicorPage';
+import LicorDetail from './pages/LicorDetail';
+
 function App() {
   return (
     <div className="app">
@@ -24,11 +31,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/user" element={<User />} />
+
         <Route path="/recetas" element={<RegisterRecipe />} />
         <Route path="/detallesReceta/:id" element={<RecipeDetail />} />
-        <Route path="/principal" element={<Principal />} />
         <Route path="/modificarReceta/:recipeId" element={<ModificarRecetaForm />} />
+
         <Route path="/inactivos" element={<Inactive />} />
+
+        <Route path="/agregarLicor" element={<RegisterLicor />} />
+        <Route path="/verLicor" element={<Licores />} />
+        <Route path="/detallesLicor/:id" element={<LicorDetail />} />
 
         <Route path="/profile" element={<Profile />} />
         </Routes>

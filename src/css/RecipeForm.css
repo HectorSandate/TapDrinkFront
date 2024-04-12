@@ -4,6 +4,15 @@
     border-color: gray;
     font-family: 'Roboto Mono', monospace; 
 }
+.select-style{
+    color: #ffffff;
+    box-shadow: 2px 2px 2px #ffc107b7 ;
+    border-color: gray;
+    font-family: 'Roboto Mono', monospace; 
+    background-color: #000000;
+    border-radius: 50px;
+}
+
 .img-style{
     background-color: #ffffff;
     color: #000000;

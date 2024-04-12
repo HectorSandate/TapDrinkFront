@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const LicorFormPopover = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     nombreLicor: '',
     mililitros: '',
@@ -54,15 +53,8 @@ const LicorFormPopover = () => {
   };
 
   return (
-    <div className="relative">
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        Registrar Licor
-      </button>
-      {isOpen && (
-        <div className="absolute top-full mt-2 right-0 bg-white shadow-md rounded p-4 w-96">
+    <div>
+        <div className="shadow-md rounded p-4 w-96 licor-style">
           <form onSubmit={handleSubmit}>
             <div>
               <label className="block">Nombre del Licor</label>
@@ -100,7 +92,6 @@ const LicorFormPopover = () => {
             </div>
           </form>
         </div>
-      )}
     </div>
   );
 };

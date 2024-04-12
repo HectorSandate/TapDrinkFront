@@ -29,3 +29,11 @@
     font-size: 24px;
     transition: ease-in;
   }
+
+  .licor-style{
+    color: #ffffff;
+    background-color: #000000;
+    box-shadow: 2px 2px 2px #ffc107b7 ;
+    border-color: gray;
+    font-family: 'Roboto Mono', monospace; 
+}

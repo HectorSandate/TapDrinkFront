@@ -57,7 +57,7 @@ function ModificarRecetaForm() {
 
       if (response.ok) {
         alert("Receta modificada con éxito");
-        navigate("/");
+        navigate("/home");
       } else {
         alert("Error al modificar la receta");
       }

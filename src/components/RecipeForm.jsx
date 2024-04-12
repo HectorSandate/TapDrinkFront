@@ -2,6 +2,7 @@ import "../css/RecipeForm.css";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 
+
 function RecetaForm() {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -129,6 +130,7 @@ function RecetaForm() {
           />
         </div>
       </div>
+        
 
       <div className="space-y-3">
         <label className="block title-style">Procedimiento</label>
@@ -148,7 +150,7 @@ function RecetaForm() {
               name="licor"
               value={paso.licor}
               onChange={(e) => handleStepChange(index, e)}
-              className="px-3 py-2 rounded-md inputs-style"
+              className="px-3 py-2 rounded-md select-style"
             >
               <option value="">Selecciona un licor</option>
               {licores.map((licor) => (
