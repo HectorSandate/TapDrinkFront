@@ -1,12 +1,11 @@
-// RecipeCard.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function RecipeCard({ recipeId, imageUrl, title, description, onDelete , onClick}) {
+function RecipeCard({ recipeId, imageUrl, title, description, onDelete, onClick, onPublish }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const navigate = useNavigate();
 
-  const togglePopover = () => setIsPopoverOpen(!isPopoverOpen); 
+  const togglePopover = () => setIsPopoverOpen(!isPopoverOpen);
 
   const handleModifyClick = () => {
     navigate(`/modificarReceta/${recipeId}`);
@@ -20,9 +19,8 @@ function RecipeCard({ recipeId, imageUrl, title, description, onDelete , onClick
         <p className="card-text">{description}</p>
         <button className="btn btn-primary" onClick={() => onClick(recipeId)}>Ver receta</button>
         <button className="btn btn-secondary mr-2" onClick={handleModifyClick}>Modificar</button>
-        {/* Botón para eliminar */}
         <button className="btn btn-danger ml-2" onClick={togglePopover}>Eliminar</button>
-        {/* Popover de Tailwind */}
+        <button className="btn btn-info ml-2" onClick={onPublish}>Publicar Procedimiento</button>
         {isPopoverOpen && (
           <div className="absolute z-10 w-44 bg-white shadow-lg rounded-lg right-0 mt-2">
             <div className="p-4 flex flex-col">

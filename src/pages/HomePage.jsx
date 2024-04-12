@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import mqtt from "mqtt";
 import BarNavi from "../components/HomeNav";
 import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +9,12 @@ import RecipeCard from "../components/Recipe";
 function HomePage() {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
+  const [client, setClient] = useState(null);
 
   useEffect(() => {
+    const mqttClient = mqtt.connect("http://test.mosquitto.org:8080/mqtt');");
+    setClient(mqttClient);
+
     fetch("https://taplibkback.onrender.com/api/recetas/active")
       .then((response) => response.json())
       .then((data) => {
@@ -21,6 +26,10 @@ function HomePage() {
         }
       })
       .catch((error) => console.error("Error al traer las recetas:", error));
+
+    return () => {
+      mqttClient.end();
+    };
   }, []);
 
   const handleRecipeClick = (recipeId) => {
@@ -29,25 +38,27 @@ function HomePage() {
 
   const handleEdit = (recipeId) => {
     navigate(`/editReceta/${recipeId}`);
-  };  
+  };
 
   const handleDelete = (recipeId, type) => {
     if (type === "temporary") {
-      // Llama a la API para desactivar la receta
       fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}/deactivate`, { method: "PUT" })
         .then((res) => res.json())
         .then(() => {
-          // Actualiza tu estado o UI aquí
           console.log("Receta desactivada");
         });
     } else if (type === "permanent") {
-      // Llama a la API para eliminar la receta permanentemente
       fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}`, { method: "DELETE" })
         .then((res) => res.json())
         .then(() => {
-          // Actualiza tu estado o UI aquí
           console.log("Receta eliminada permanentemente");
         });
+    }
+  };
+
+  const publishProcedimiento = (procedimiento) => {
+    if (client) {
+      client.publish("recetas/procedimiento",procedimiento);
     }
   };
 
@@ -72,10 +83,11 @@ function HomePage() {
                   recipeId={recipe._id}
                   imageUrl={recipe.image.secure_url}
                   title={recipe.nombre}
-                  description={recipe.duracion} // o cualquier otra propiedad para 'description'
+                  description={recipe.duracion}
                   onClick={handleRecipeClick}
                   onDelete={handleDelete}
-                  onEdit={handleEdit} // Pasar la función de eliminación
+                  onEdit={handleEdit}
+                  onPublish={() => publishProcedimiento(recipe.procedimiento)}
                 />
               </div>
             ))}
