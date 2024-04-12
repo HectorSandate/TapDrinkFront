@@ -118,16 +118,19 @@ function RecetaForm() {
           />
         </div>
         <div>
-          <label htmlFor="categoria" className="block title-style">
-            Categoría
-          </label>
-          <input
-            type="text"
-            name="categoria"
-            value={formData.categoria}
-            onChange={handleChange}
-            className="mt-1 block px-2 py-2 rounded-md inputs-style"
-          />
+        <label htmlFor="categoria" className="block title-style">
+            Categoria
+        </label>
+        <select
+              name="categoria"
+              value={formData.categoria}
+              onChange={handleChange}
+              className="px-3 py-2 rounded-md select-style"
+            >
+              <option value="">Selecciona una categoria</option>
+              <option value="Sin alcohol">Sin alcohol</option>
+              <option value="Con alcohol">Con alcohol</option>
+            </select>
         </div>
       </div>
         
