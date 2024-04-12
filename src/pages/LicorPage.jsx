@@ -6,7 +6,7 @@ import LicorCard from "../components/Licor";
 
 function Licores() {
   const navigate = useNavigate();
-  const [licores, setLicor] = useState([]);
+  const [licor, setLicor] = useState([]);
 
   useEffect(() => {
     fetch("https://taplibkback.onrender.com/api/licores/active")
@@ -50,7 +50,7 @@ function Licores() {
     }
   };
 
-  if (licores.length === 0) {
+  if (licor.length === 0) {
     return <p>Cargando...</p>;
   }
 
@@ -64,13 +64,13 @@ function Licores() {
         </div>
         <div className="container">
           <div className="row">
-            {licores.map((licores) => (
-              <div className="col-md-4" key={licores._id}>
+            {licor.map((licor) => (
+              <div className="col-md-4" key={licor._id}>
                 <LicorCard
-                  licorId={licores._id}
-                  imageUrl={licores.image.secure_url}
-                  title={licores.nombreLicor}
-                  description={licores.mililitros} // o cualquier otra propiedad para 'description'
+                  licorId={licor._id}
+                  imageUrl={licor.image.secure_url}
+                  title={licor.nombreLicor}
+                  description={licor.mililitros} // o cualquier otra propiedad para 'description'
                   onClick={handleRecipeClick}
                   onDelete={handleDelete}
                   onEdit={handleEdit} // Pasar la función de eliminación

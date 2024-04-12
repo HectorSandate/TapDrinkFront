@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import '../css/modificarForm.css'; // Asegúrate de ajustar el nombre del archivo de estilos según sea necesario.
+import '../css/modificarForm.css';
 
 function ModificarLicorForm() {
   const { licorId } = useParams();
@@ -22,11 +22,9 @@ function ModificarLicorForm() {
         setFormData({
           nombreLicor: data.licor.nombreLicor,
           mililitros: data.licor.mililitros,
-          // No establecemos el valor del campo de imagen aquí
         });
       } catch (error) {
         console.error("Error al cargar el licor:", error);
-        // Aquí puedes manejar el error como desees, por ejemplo, redirigir a una página de error.
       }
     };
 
@@ -42,7 +40,6 @@ function ModificarLicorForm() {
     const formDataToSend = new FormData();
     formDataToSend.append("nombreLicor", formData.nombreLicor);
     formDataToSend.append("mililitros", formData.mililitros);
-    //formDataToSend.append("image", formData.image);
 
     try {
       const response = await fetch(`https://taplibkback.onrender.com/api/licor/modificar/${licorId}`, {
@@ -100,3 +97,4 @@ function ModificarLicorForm() {
 }
 
 export default ModificarLicorForm;
+ 
