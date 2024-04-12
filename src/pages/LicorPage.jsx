@@ -13,10 +13,10 @@ function Licores() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from API:", data);
-        if (Array.isArray(data.licores)) {
-          setLicor(data.licores);
+        if (Array.isArray(data.licor)) {
+          setLicor(data.licor);
         } else {
-          console.error("Recetas array not found in data:", data);
+          console.error("Licor array not found in data:", data);
         }
       })
       .catch((error) => console.error("Error al traer los licores:", error));
@@ -30,25 +30,25 @@ function Licores() {
     navigate(`/editLicor/${licorId}`);
   };  
 
-  const handleDelete = (licorId, type) => {
-    if (type === "temporary") {
-      // Llama a la API para desactivar la receta
-      fetch(`https://taplibkback.onrender.com/api/recetas/${licorId}/deactivate`, { method: "PUT" })
-        .then((res) => res.json())
-        .then(() => {
-          // Actualiza tu estado o UI aquí
-          console.log("Licor desactivada");
-        });
-    } else if (type === "permanent") {
-      // Llama a la API para eliminar la receta permanentemente
-      fetch(`https://taplibkback.onrender.com/api/recetas/${licorId}`, { method: "DELETE" })
-        .then((res) => res.json())
-        .then(() => {
-          // Actualiza tu estado o UI aquí
-          console.log("Licor eliminada permanentemente");
-        });
-    }
-  };
+  // const handleDelete = (licorId, type) => {
+  //   if (type === "temporary") {
+  //     // Llama a la API para desactivar la receta
+  //     fetch(`https://taplibkback.onrender.com/api/recetas/${licorId}/deactivate`, { method: "PUT" })
+  //       .then((res) => res.json())
+  //       .then(() => {
+  //         // Actualiza tu estado o UI aquí
+  //         console.log("Licor desactivada");
+  //       });
+  //   } else if (type === "permanent") {
+  //     // Llama a la API para eliminar la receta permanentemente
+  //     fetch(`https://taplibkback.onrender.com/api/recetas/${licorId}`, { method: "DELETE" })
+  //       .then((res) => res.json())
+  //       .then(() => {
+  //         // Actualiza tu estado o UI aquí
+  //         console.log("Licor eliminada permanentemente");
+  //       });
+  //   }
+  // };
 
   if (licores.length === 0) {
     return <p>Cargando...</p>;
@@ -72,7 +72,7 @@ function Licores() {
                   title={licores.nombreLicor}
                   description={licores.mililitros} // o cualquier otra propiedad para 'description'
                   onClick={handleRecipeClick}
-                  onDelete={handleDelete}
+                  //onDelete={handleDelete}
                   onEdit={handleEdit} // Pasar la función de eliminación
                 />
               </div>
