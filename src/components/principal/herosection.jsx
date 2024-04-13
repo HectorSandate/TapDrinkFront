@@ -9,11 +9,9 @@ const PaymentComponent = () => {
         backgroundImage: `url(${imagen2})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         width: "100vw",
         height: "100vh",
-        
-        top: 0,
-        left: 0,
       }}
     >
       <div className="grid max-w-screen-xl px-20 py-60  lg:gap-8 xl:gap-0 lg:py-12 lg:grid-cols-12">
