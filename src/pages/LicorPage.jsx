@@ -33,18 +33,22 @@ function Licores() {
   const handleDelete = (licorId, type) => {
     if (type === "temporary") {
       // Llama a la API para desactivar la receta
-      fetch(`https://taplibkback.onrender.com/api/recetas/${licorId}/deactivate`, { method: "PUT" })
+      fetch(`https://taplibkback.onrender.com/api/licores/${licorId}/deactivate`, { method: "PUT" })
         .then((res) => res.json())
         .then(() => {
           // Actualiza tu estado o UI aquí
+          alert("Licor desactivado");
+          console.log(licorId)
           console.log("Licor desactivada");
         });
     } else if (type === "permanent") {
       // Llama a la API para eliminar la receta permanentemente
-      fetch(`https://taplibkback.onrender.com/api/recetas/${licorId}`, { method: "DELETE" })
+      fetch(`https://taplibkback.onrender.com/api/licores/${licorId}`, { method: "DELETE" })
         .then((res) => res.json())
         .then(() => {
           // Actualiza tu estado o UI aquí
+          alert("Licor eliminado permanentemente");
+          console.log(licorId)
           console.log("Licor eliminada permanentemente");
         });
     }

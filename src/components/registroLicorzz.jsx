@@ -63,7 +63,7 @@ const LicorFormPopover = () => {
                 name="nombreLicor"
                 value={formData.nombreLicor}
                 onChange={handleChange}
-                className="mt-1 p-2 border rounded w-full"
+                className="mt-1 p-2 border rounded w-full text-black"
               />
             </div>
             <div>
@@ -73,7 +73,7 @@ const LicorFormPopover = () => {
                 name="mililitros"
                 value={formData.mililitros}
                 onChange={handleChange}
-                className="mt-1 p-2 border rounded w-full"
+                className="mt-1 p-2 border rounded w-full text-black"
               />
             </div>
             <div>
