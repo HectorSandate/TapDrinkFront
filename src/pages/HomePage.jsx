@@ -4,6 +4,10 @@ import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
+import LampDemo from "../components/lampara";
+
+import { motion } from "framer-motion";
+import { LampContainer } from "../components/cartaPrueba/ui/lamp.tsx";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -29,12 +33,15 @@ function HomePage() {
 
   // const handleEdit = (recipeId) => {
   //   navigate(`/editReceta/${recipeId}`);
-  // };  
+  // };
 
   const handleDelete = (recipeId, type) => {
     if (type === "temporary") {
       // Llama a la API para desactivar la receta
-      fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}/deactivate`, { method: "PUT" })
+      fetch(
+        `https://taplibkback.onrender.com/api/recetas/${recipeId}/deactivate`,
+        { method: "PUT" }
+      )
         .then((res) => res.json())
         .then(() => {
           // Actualiza tu estado o UI aquí
@@ -42,7 +49,9 @@ function HomePage() {
         });
     } else if (type === "permanent") {
       // Llama a la API para eliminar la receta permanentemente
-      fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}`, { method: "DELETE" })
+      fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}`, {
+        method: "DELETE",
+      })
         .then((res) => res.json())
         .then(() => {
           // Actualiza tu estado o UI aquí
@@ -57,28 +66,41 @@ function HomePage() {
 
   return (
     <>
-      <div className="bar-navigator-container ">
-        <BarNavi />
-      </div>
       <div className="home-page-container black-background">
-        <div className="search-page">
-          <BebidaFormulario />
-        </div>
-        <div className="container">
-          <div className="row">
-            {recipes.map((recipe) => (
-              <div className="col-md-4" key={recipe._id}>
-                <RecipeCard
-                  recipeId={recipe._id}
-                  imageUrl={recipe.image.secure_url}
-                  title={recipe.nombre}
-                  description={recipe.duracion} // o cualquier otra propiedad para 'description'
-                  onClick={handleRecipeClick}
-                  onDelete={handleDelete}
-                  // onEdit={handleEdit} // Pasar la función de eliminación
-                />
-              </div>
-            ))}
+        <div className="overlay-container">
+          <LampContainer>
+            <motion.h1
+              initial={{ opacity: 0.5, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.8,
+                ease: "easeInOut",
+              }}
+              className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+            ></motion.h1>
+          </LampContainer>
+          <div className="bar-navigator-container">
+            <BarNavi />
+          </div>
+          <div className="overlay-content">
+            <div className="search-page">
+              <BebidaFormulario />
+            </div>
+            <div className="recipe-grid">
+              {recipes.map((recipe) => (
+                <div key={recipe._id}>
+                  <RecipeCard
+                    recipeId={recipe._id}
+                    imageUrl={recipe.image.secure_url}
+                    title={recipe.nombre}
+                    description={recipe.duracion}
+                    onClick={handleRecipeClick}
+                    onDelete={handleDelete}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

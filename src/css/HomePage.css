@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 .home-page-container {
   display: block;
   height: 100vh;
@@ -29,4 +34,24 @@
     font-size: 20px;
     margin-left: 25%;
     margin-bottom: 40px;
+}
+.overlay-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 20px; /* Agrega un poco de espacio alrededor del contenido */
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta el ancho mínimo y máximo de las columnas según tus necesidades */
+  gap: 30px; /* Espacio entre las tarjetas */
 }

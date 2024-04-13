@@ -20,6 +20,8 @@ import Licores from './pages/LicorPage';
 import LicorDetail from './pages/LicorDetail';
 import ModificarLicorForm from './pages/modificarLicor';
 
+
+
 function App() {
   return (
     <div className="app">
@@ -45,6 +47,8 @@ function App() {
         <Route path="/editLicor/:licorId" element={<ModificarLicorForm />} />
 
         <Route path="/profile" element={<Profile />} />
+
+
 
         </Routes>
       </Router>
