@@ -5,7 +5,7 @@ import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "../assets/icons/CloseIcon.svg";
 import "../css/HomeNav.css";
 
-const HomeBar = () => {
+const BarNavi = () => {
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -217,4 +217,4 @@ const HomeBar = () => {
   );
 };
 
-export default HomeBar;
+export default BarNavi;

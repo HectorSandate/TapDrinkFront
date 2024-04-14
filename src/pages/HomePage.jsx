@@ -4,7 +4,6 @@ import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
-import LampDemo from "../components/lampara";
 
 import { motion } from "framer-motion";
 import { LampContainer } from "../components/cartaPrueba/ui/lamp.tsx";
@@ -80,9 +79,7 @@ function HomePage() {
               className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
             ></motion.h1>
           </LampContainer>
-          <div className="bar-navigator-container">
-            <BarNavi />
-          </div>
+
           <div className="overlay-content">
             <div className="search-page">
               <BebidaFormulario />
@@ -100,6 +97,9 @@ function HomePage() {
                   />
                 </div>
               ))}
+            </div>
+            <div className="bar-navigator-container">
+              <BarNavi />
             </div>
           </div>
         </div>
