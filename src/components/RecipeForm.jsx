@@ -1,7 +1,7 @@
 import "../css/RecipeForm.css";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-
+import { useAuth } from "../components/context/AuthContext.jsx";
 function RecetaForm() {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -96,21 +96,53 @@ function RecetaForm() {
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
   };
-
+  const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
   return (
     <div>
+      {user && (
+        <div>
+          <p>Bienvenido, {user.userId}</p>{" "}
+          {/* Modifica según cómo guardes el nombre en el estado */}
+        </div>
+      )}
       <ol className="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
-        <li className={`flex items-center ${currentStep === 1 ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-gray-400'} space-x-2.5 rtl:space-x-reverse`}>
-          <span className={`flex items-center justify-center w-8 h-8 border ${currentStep === 1 ? 'border-blue-600 dark:border-blue-500' : 'border-gray-500 dark:border-gray-400'} rounded-full shrink-0`}>
+        <li
+          className={`flex items-center ${
+            currentStep === 1
+              ? "text-blue-600 dark:text-blue-500"
+              : "text-gray-500 dark:text-gray-400"
+          } space-x-2.5 rtl:space-x-reverse`}
+        >
+          <span
+            className={`flex items-center justify-center w-8 h-8 border ${
+              currentStep === 1
+                ? "border-blue-600 dark:border-blue-500"
+                : "border-gray-500 dark:border-gray-400"
+            } rounded-full shrink-0`}
+          >
             1
           </span>
           <span>
-            <h3 className="font-medium leading-tight">Información de la receta</h3>
+            <h3 className="font-medium leading-tight">
+              Información de la receta
+            </h3>
             <p className="text-sm">Nombre, duración y categoría</p>
           </span>
         </li>
-        <li className={`flex items-center ${currentStep === 2 ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-gray-400'} space-x-2.5 rtl:space-x-reverse`}>
-          <span className={`flex items-center justify-center w-8 h-8 border ${currentStep === 2 ? 'border-blue-600 dark:border-blue-500' : 'border-gray-500 dark:border-gray-400'} rounded-full shrink-0`}>
+        <li
+          className={`flex items-center ${
+            currentStep === 2
+              ? "text-blue-600 dark:text-blue-500"
+              : "text-gray-500 dark:text-gray-400"
+          } space-x-2.5 rtl:space-x-reverse`}
+        >
+          <span
+            className={`flex items-center justify-center w-8 h-8 border ${
+              currentStep === 2
+                ? "border-blue-600 dark:border-blue-500"
+                : "border-gray-500 dark:border-gray-400"
+            } rounded-full shrink-0`}
+          >
             2
           </span>
           <span>
@@ -118,8 +150,20 @@ function RecetaForm() {
             <p className="text-sm">Pasos de la receta</p>
           </span>
         </li>
-        <li className={`flex items-center ${currentStep === 3 ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-gray-400'} space-x-2.5 rtl:space-x-reverse`}>
-          <span className={`flex items-center justify-center w-8 h-8 border ${currentStep === 3 ? 'border-blue-600 dark:border-blue-500' : 'border-gray-500 dark:border-gray-400'} rounded-full shrink-0`}>
+        <li
+          className={`flex items-center ${
+            currentStep === 3
+              ? "text-blue-600 dark:text-blue-500"
+              : "text-gray-500 dark:text-gray-400"
+          } space-x-2.5 rtl:space-x-reverse`}
+        >
+          <span
+            className={`flex items-center justify-center w-8 h-8 border ${
+              currentStep === 3
+                ? "border-blue-600 dark:border-blue-500"
+                : "border-gray-500 dark:border-gray-400"
+            } rounded-full shrink-0`}
+          >
             3
           </span>
           <span>

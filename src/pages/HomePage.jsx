@@ -4,24 +4,22 @@ import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
-import { UserContext } from "../components/context/UserContext.jsx";
-
 import { motion } from "framer-motion";
 import { LampContainer } from "../components/cartaPrueba/ui/lamp.tsx";
-
+import { useAuth } from "../components/context/AuthContext.jsx";
 
 
 function HomePage() {
+  const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
-  const { userData } = useContext(UserContext);
 
   useEffect(() => {
     fetch("https://taplibkback.onrender.com/api/recetas/active")
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from API:", data);
-        
+
         if (Array.isArray(data.recetas)) {
           setRecipes(data.recetas);
         } else {
@@ -30,13 +28,7 @@ function HomePage() {
       })
       .catch((error) => console.error("Error al traer las recetas:", error));
   }, []); // Solo se ejecuta una vez al montar el componente
-  
-  useEffect(() => {
-    if (userData !== undefined) { // Verifica si userData no es undefined
-      console.log("Datos del contexto después de iniciar sesión:", userData);
-    }
-  }, [userData]); // Se ejecuta cuando userData cambia
-  
+
   const handleRecipeClick = (recipeId) => {
     navigate(`/detallesReceta/${recipeId}`);
   };
@@ -73,7 +65,7 @@ function HomePage() {
   if (recipes.length === 0) {
     return <p>Cargando...</p>;
   }
-
+  console.log(user)
   return (
     <>
       <div className="home-page-container black-background">
@@ -84,7 +76,7 @@ function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 delay: 0.3,
-                duration: Infinity,  // Aquí se establece la duración como Infinity
+                duration: Infinity, // Aquí se establece la duración como Infinity
                 ease: "easeInOut",
               }}
               className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
@@ -93,10 +85,17 @@ function HomePage() {
 
           <div className="overlay-content">
             <div className="search-page">
+              {user && (
+                <div>
+                  <p>Bienvenido, {user.userId}</p>{" "}
+                  {/* Modifica según cómo guardes el nombre en el estado */}
+                </div>
+              )}
               <BebidaFormulario />
+             
             </div>
             <div className="recipe-grid">
-            {recipes.slice(0, 3).map((recipe) => (
+              {recipes.slice(0, 3).map((recipe) => (
                 <div key={recipe._id}>
                   <RecipeCard
                     recipeId={recipe._id}
