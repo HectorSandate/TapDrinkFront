@@ -101,7 +101,7 @@ function RecetaForm() {
     <div>
       {user && (
         <div>
-          <p>Bienvenido, {user.userId}</p>{" "}
+          <p>Bienvenido, {user.name}</p>{" "}
           {/* Modifica según cómo guardes el nombre en el estado */}
         </div>
       )}

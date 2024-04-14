@@ -87,7 +87,7 @@ function HomePage() {
             <div className="search-page">
               {user && (
                 <div>
-                  <p>Bienvenido, {user.userId}</p>{" "}
+                  <p>Bienvenido, {user.name}  NIvel: {user.nivel}</p>{" "}
                   {/* Modifica según cómo guardes el nombre en el estado */}
                 </div>
               )}

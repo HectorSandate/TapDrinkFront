@@ -21,11 +21,13 @@ const Login = () => {
         password,
       });
       if (response.data) {
-        const { token, userId } = response.data;
+        const { token, userId, name, nivel } = response.data;
         console.log("Received token:", token);  // Imprime el token recibido
-        console.log("Received user ID:", userId);  // Imprime el ID del usuario recibido
+        console.log("Received user ID:", userId);
+        console.log("Received user ID:", name);
+        console.log("Received user ID:", nivel);  // Imprime el ID del usuario recibido
         
-        login({ token, userId, email });  // Asumiendo que quieres almacenar el email también
+        login({ token, userId, email, name,  nivel });  // Asumiendo que quieres almacenar el email también
         toast.success("Inicio de sesión exitoso");
         navigate("/home");
       }
