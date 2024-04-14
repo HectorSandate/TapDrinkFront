@@ -80,15 +80,13 @@ function HomePage() {
               className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
             ></motion.h1>
           </LampContainer>
-          <div className="bar-navigator-container">
-            <BarNavi />
-          </div>
+
           <div className="overlay-content">
             <div className="search-page">
               <BebidaFormulario />
             </div>
             <div className="recipe-grid">
-              {recipes.map((recipe) => (
+            {recipes.slice(0, 3).map((recipe) => (
                 <div key={recipe._id}>
                   <RecipeCard
                     recipeId={recipe._id}
@@ -100,6 +98,9 @@ function HomePage() {
                   />
                 </div>
               ))}
+            </div>
+            <div className="bar-navigator-container">
+              <BarNavi />
             </div>
           </div>
         </div>
