@@ -1,6 +1,6 @@
 import React from "react";
 import Hero from "../components/principal/herosection";
-import AboutSection from "../components/principal/AboutSection";
+//import AboutSection from "../components/principal/AboutSection";
 import MisionVision from "../components/principal/MisionVision";
 import Testimonio from "../components/principal/Sepa";
 import 'slick-carousel/slick/slick.css';

@@ -13,7 +13,7 @@ function LicorCard({ licorId, imageUrl, title, description, onDelete , onClick, 
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <h5 className="card-text">{description}</h5>
-        <button className="btn btn-primary" onClick={() => onClick(licorId)}>Ver receta</button>
+        <button className="btn btn-primary" onClick={() => onClick(licorId)}>Ver licor</button>
         <button className="btn btn-secondary mr-2" onClick={() => onEdit(licorId)}>Modificar</button>
         {/* Botón para eliminar */}
         <button className="btn btn-danger ml-2" onClick={togglePopover}>Eliminar</button>

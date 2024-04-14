@@ -4,7 +4,6 @@ import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
-import LampDemo from "../components/lampara";
 
 import { motion } from "framer-motion";
 import { LampContainer } from "../components/cartaPrueba/ui/lamp.tsx";
