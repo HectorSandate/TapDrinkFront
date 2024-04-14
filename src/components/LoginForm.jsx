@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "../css/forms.css";
-//import { UserContext } from "./context/UserContext";
+import { UserContext } from "./context/UserContext";
 
 const Login = () => {
-//  const { setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext); // Obtener la función setUser del contexto
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ const Login = () => {
         email,
         password,
       });
-      console.log("Respuesta del servidor:", response.data);
-      //setUser(response.data.user); // Asegúrate de que la respuesta contenga los datos del usuario
+      console.log("Respuesta del servidor:", response.data); // Mostrar datos devueltos por el servidor
+      setUser(response.data.user); // Establecer los datos del usuario en el contexto
       toast.success("Inicio de sesión exitoso");
       navigate("/home");
     } catch (error) {
