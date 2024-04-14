@@ -36,6 +36,7 @@ function HomePage() {
       console.log("Datos del contexto después de iniciar sesión:", userData);
     }
   }, [userData]); // Se ejecuta cuando userData cambia
+  
   const handleRecipeClick = (recipeId) => {
     navigate(`/detallesReceta/${recipeId}`);
   };

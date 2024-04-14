@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "../css/forms.css";
-import { UserContext } from "./context/UserContext";
+import { UserContext } from "../components/context/UserContext";
 
 const Login = () => {
-  const { setUser } = useContext(UserContext); // Obtener la función setUser del contexto
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -19,8 +19,10 @@ const Login = () => {
         email,
         password,
       });
-      console.log("Respuesta del servidor:", response.data); // Mostrar datos devueltos por el servidor
-      setUser(response.data.user); // Establecer los datos del usuario en el contexto
+
+      // Establecer los datos del usuario en el contexto
+      setUser(response.data.user);
+
       toast.success("Inicio de sesión exitoso");
       navigate("/home");
     } catch (error) {
@@ -30,9 +32,7 @@ const Login = () => {
         if (status === 401) {
           toast.error(data.message);
         } else {
-          toast.error(
-            "Error al iniciar sesión. Por favor, verifica tus datos."
-          );
+          toast.error("Error al iniciar sesión. Por favor, verifica tus datos.");
         }
       } else {
         toast.error("Error al comunicarse con el servidor.");
@@ -41,26 +41,34 @@ const Login = () => {
   };
 
   const headerStyle = {
-    color: '#FFF711',
-    fontFamily: 'Roboto Mono, monospace',
-    fontSize: '30px',
+    color: "#FFF711",
+    fontFamily: "Roboto Mono, monospace",
+    fontSize: "30px",
   };
 
   const buttonStyle = {
-    fontFamily: 'Roboto Mono, monospace',
+    fontFamily: "Roboto Mono, monospace",
   };
 
   return (
     <div>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false}
-         newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHovertheme="dark"/>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Card className="col-md-4" style={{ background: "black" }}>
         <Card.Header className="text-center" style={headerStyle}>
           TapDrink
         </Card.Header>
-        <Card.Text className="text-center card-text-style">
-          Welcome Back!
-        </Card.Text>
+        <Card.Text className="text-center card-text-style">Welcome Back!</Card.Text>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <FloatingLabel controlId="floatingemail" label="Email" className="mb-3">
@@ -80,16 +88,17 @@ const Login = () => {
               />
             </FloatingLabel>
             <br />
-            <Button className="col-md-12 custom-button" variant="warning" style={buttonStyle} type="submit">
+            <Button
+              className="col-md-12 custom-button"
+              variant="warning"
+              style={buttonStyle}
+              type="submit"
+            >
               Iniciar Sesión
             </Button>
           </Form>
           <hr className="separator-style" />
-
-          <div className="text-center register-text-style">
-            Aún no tienes cuenta?
-          </div>
-
+          <div className="text-center register-text-style">Aún no tienes cuenta?</div>
           <div className="text-center">
             <Link to="/register" className="link-style">
               Regístrate aquí
