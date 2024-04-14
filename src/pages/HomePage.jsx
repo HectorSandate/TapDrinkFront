@@ -1,22 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BarNavi from "../components/HomeNav";
 import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
+import { UserContext } from "../components/context/UserContext.jsx";
 
 import { motion } from "framer-motion";
 import { LampContainer } from "../components/cartaPrueba/ui/lamp.tsx";
 
+
+
 function HomePage() {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
+  const { userData } = useContext(UserContext);
 
   useEffect(() => {
     fetch("https://taplibkback.onrender.com/api/recetas/active")
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from API:", data);
+        
         if (Array.isArray(data.recetas)) {
           setRecipes(data.recetas);
         } else {
@@ -24,8 +29,13 @@ function HomePage() {
         }
       })
       .catch((error) => console.error("Error al traer las recetas:", error));
-  }, []);
-
+  }, []); // Solo se ejecuta una vez al montar el componente
+  
+  useEffect(() => {
+    if (userData !== undefined) { // Verifica si userData no es undefined
+      console.log("Datos del contexto después de iniciar sesión:", userData);
+    }
+  }, [userData]); // Se ejecuta cuando userData cambia
   const handleRecipeClick = (recipeId) => {
     navigate(`/detallesReceta/${recipeId}`);
   };
