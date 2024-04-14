@@ -22,14 +22,14 @@ function RecipeCard({ recipeId, imageUrl, title, description, onDelete, onClick 
                 <CardItem as="h5" translateZ="50" className="card-title text-xl font-bold text-neutral-600 dark:text-white">
                     {title}
                 </CardItem>
-                <CardItem as="p" translateZ="60" className="card-text text-neutral-500 text-sm dark:text-neutral-300">
+                <CardItem as="p" translateZ="60" className="card-text text-neutral-500 text-sm dark:text font-bold" >
                     {description}
                 </CardItem>
                 <div className="flex justify-between items-center mt-20">
                     <CardItem translateZ={20} as="button"
                         className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
                         onClick={() => onClick(recipeId)}>
-                        Ver receta
+                        Ir
                     </CardItem>
                     <CardItem translateZ={20} as="button"
                         className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
