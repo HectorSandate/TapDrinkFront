@@ -4,6 +4,8 @@ import logo from "../assets/images/logo-horizontal.png";
 import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "../assets/icons/CloseIcon.svg";
 import "../css/HomeNav.css";
+import { useAuth } from './context/AuthContext'; // Asegúrate de proporcionar la ruta correcta al contexto de autenticación
+
 
 const BarNavi = () => {
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
@@ -11,6 +13,12 @@ const BarNavi = () => {
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const { logout } = useAuth(); // Obtener el método logout del contexto de autenticación
+
+  const handleLogout = () => {
+    logout(); // Llamar al método logout al hacer clic en "Log out"
   };
 
   return (
@@ -167,8 +175,9 @@ const BarNavi = () => {
               </li>
               <li>
                 <Nav.Link
-                  href="/"
+                  href="/login"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  onClick={handleLogout} // Llamar a la función handleLogout cuando se hace clic en "Log out"
                 >
                   <svg
                     className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-black"
