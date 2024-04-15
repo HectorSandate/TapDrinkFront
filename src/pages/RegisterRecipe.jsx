@@ -11,12 +11,12 @@ function RegisterRecipe() {
     <>
       <div className="home-page-container black-background">
         <div className="overlay">
-          <div className="bar-navigator-container">
-            <BarNavi />
-          </div>
           <div className="overlay-content">
             <div className="search-page">
               <RecetaForm />
+            </div>
+            <div className="bar-navigator-container">
+              <BarNavi />
             </div>
           </div>
           <LampContainer>
