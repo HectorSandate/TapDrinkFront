@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/card.css';
 import pfp from '../assets/images/pinfuino.jpeg';
 import { Button } from 'react-bootstrap';
 import { useAuth } from './context/AuthContext';
+import Modal from "../components/modal/Modal.jsx";
+import UserUpdate from "./userUpdate.jsx"
+
 
 const UserPage = () => {
   const { user, logout } = useAuth(); // Obtener el usuario y el método logout del contexto de autenticación
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = (e) => {
+    e.preventDefault(); // Prevenir la navegación del <a> si existe
+    e.stopPropagation(); // Detener la propagación para evitar efectos secundarios
+    setModalOpen(!isModalOpen);
+  };
 
   const botonesStyle = {
     fontFamily: 'Roboto Mono, monospace',
@@ -25,9 +35,14 @@ const UserPage = () => {
           </>
         )}
         {/* Botón para actualizar datos */}
-        <Button variant="info" className="button-data" style={botonesStyle}>
+        <Button variant="info" className="button-data" style={botonesStyle} onClick={toggleModal}>
           Actualizar Datos
         </Button>
+        {isModalOpen && (
+              <Modal isOpen={isModalOpen} close={toggleModal}>
+                <UserUpdate />
+              </Modal>
+            )}
         {/* Botón para cerrar sesión */}
         <Button variant="danger" className="button-log" style={botonesStyle} href="/login" onClick={logout}>
           Log out
