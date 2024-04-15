@@ -102,42 +102,6 @@ function HomePage() {
       .catch((error) => console.error("Error al traer las recetas:", error));
   };
 
-  const handleFilter = (nombre, categoria) => {
-    let url = 'https://taplibkback.onrender.com/api/recetas/active';
-    if (nombre) {
-      url += `/nombre/${nombre}`;
-    } else if (categoria) {
-      url += `/categoria/${categoria}`;
-    }
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Data from API:", data);
-        if (Array.isArray(data)) {
-          setRecipes(data);
-        } else {
-          console.error("Recetas array not found in data:", data);
-        }
-      })
-      .catch((error) => console.error("Error al traer las recetas:", error));
-  };
-
-  const handleClearFilter = () => {
-    // Llama a la API para obtener todas las recetas nuevamente
-    fetch("https://taplibkback.onrender.com/api/recetas/active")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Data from API:", data);
-        if (Array.isArray(data.recetas)) {
-          setRecipes(data.recetas);
-        } else {
-          console.error("Recetas array not found in data:", data);
-        }
-      })
-      .catch((error) => console.error("Error al traer las recetas:", error));
-  };
-
   console.log(user);
 
   return (
