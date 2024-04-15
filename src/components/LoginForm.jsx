@@ -1,4 +1,3 @@
-// Login.jsx
 import React, { useState } from "react";
 import { Card, Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import "../css/forms.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -22,12 +22,12 @@ const Login = () => {
       });
       if (response.data) {
         const { token, userId, name, nivel } = response.data;
-        console.log("Received token:", token);  // Imprime el token recibido
+        console.log("Received token:", token);  
         console.log("Received user ID:", userId);
         console.log("Received user ID:", name);
-        console.log("Received user ID:", nivel);  // Imprime el ID del usuario recibido
+        console.log("Received user ID:", nivel);  
         
-        login({ token, userId, email, name,  nivel });  // Asumiendo que quieres almacenar el email también
+        login({ token, userId, email, name,  nivel });  
         toast.success("Inicio de sesión exitoso");
         navigate("/home");
       }
@@ -46,9 +46,18 @@ const Login = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+    setIsButtonDisabled(!(email.trim() && password.trim()));
+  };
+
   const headerStyle = { color: "#FFF711", fontFamily: "Roboto Mono, monospace", fontSize: "30px" };
   const buttonStyle = { fontFamily: "Roboto Mono, monospace" };
-
   return (
     <div>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
@@ -58,13 +67,14 @@ const Login = () => {
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <FloatingLabel controlId="floatingemail" label="Email" className="mb-3">
-              <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Form.Control type="email" placeholder="Email" name="email" value={email} onChange={handleInputChange} />
             </FloatingLabel>
             <FloatingLabel controlId="floatingPassword" label="Contraseña">
-              <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <Form.Control type="password" placeholder="Contraseña" name="password" value={password} onChange={handleInputChange} />
             </FloatingLabel>
             <br />
-            <Button className="col-md-12 custom-button" variant="warning" style={buttonStyle} type="submit">Iniciar Sesión</Button>
+            <Button className="col-md-12 custom-button" variant="warning" style={buttonStyle} type="submit" disabled={isButtonDisabled}>Iniciar Sesión</Button>
+
           </Form>
           <hr className="separator-style" />
           <div className="text-center register-text-style">¿Aún no tienes cuenta?</div>

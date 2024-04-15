@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -10,7 +10,13 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Estado para controlar la habilitación del botón
   const navigate = useNavigate(); 
+
+  // Efecto para habilitar o deshabilitar el botón según el estado de los campos
+  useEffect(() => {
+    setIsButtonDisabled(!(name && email && password && confirmPassword));
+  }, [name, email, password, confirmPassword]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,7 +118,7 @@ const Register = () => {
             </FloatingLabel>
 
             <br />
-            <Button className="col-md-12 custom-button" style={buttonStyle} variant="warning" type="submit">
+            <Button className="col-md-12 custom-button" style={buttonStyle} variant="warning" type="submit" disabled={isButtonDisabled}>
               Registrarse
             </Button>
           </Form>

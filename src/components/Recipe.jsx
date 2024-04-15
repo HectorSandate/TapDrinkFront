@@ -80,7 +80,7 @@ function RecipeCard({ recipeId, imageUrl, title, description, onDelete, onClick 
                         <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">Eliminar receta</h3>
                         <p className="text-gray-500 dark:text-gray-400 mb-12">¿Estás seguro de que deseas eliminar esta receta?</p>
                         <button onClick={handleDeleteTemp} className="block bg-red-600 text-white px-5 py-2.5 rounded-lg mr-3 focus:outline-none focus:ring-4 focus:ring-red-300">Baja Temporal</button>
-                        <button onClick={handleDeletePerm} className="block bg-red-600 text-white px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-red-300">Baja Permanente</button>
+                        <button onClick={handleDeletePerm} className="block bg-red-600 text-white px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-red-300 mt-3">Baja Permanente</button>
                     </div>
                 </div>
             )}
@@ -90,7 +90,7 @@ function RecipeCard({ recipeId, imageUrl, title, description, onDelete, onClick 
                         <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-5">Confirmar eliminación</h3>
                         <p className="text-gray-500 dark:text-gray-400 mb-5">Esta acción eliminará la receta de forma temporal. ¿Estás seguro?</p>
                         <button onClick={handleConfirmDeletePerm} className="block bg-red-600 text-white px-5 py-2.5 rounded-lg mr-3 focus:outline-none focus:ring-4 focus:ring-red-300">Sí, eliminar permanentemente</button>
-                        <button onClick={handleCloseConfirmModal} className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300">Cancelar</button>
+                        <button onClick={handleCloseConfirmModal} className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3">Cancelar</button>
                     </div>
                 </div>
             )}

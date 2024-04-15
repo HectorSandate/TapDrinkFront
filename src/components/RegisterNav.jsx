@@ -19,13 +19,13 @@ function BarNavi() {
   };
 
   const handleLogin= () => {
-    navigate('/');
+    navigate('/login');
   };
 
   return (
     <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''}`}>
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
         <img
             src={logo}
             width="150"

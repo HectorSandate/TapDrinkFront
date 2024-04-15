@@ -2,6 +2,7 @@ import "../css/RecipeForm.css";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../components/context/AuthContext.jsx";
+
 function RecetaForm() {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -96,6 +97,17 @@ function RecetaForm() {
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
   };
+
+  const isStepValid = () => {
+    if (currentStep === 1) {
+      return formData.nombre !== "" && formData.duracion !== "" && formData.categoria !== "";
+    } else if (currentStep === 2) {
+      return formData.procedimiento.every(paso => paso.paso !== "" && paso.licor !== "" && paso.cantidad !== "");
+    } else {
+      return formData.image !== "";
+    }
+  };
+
   const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
   return (
     <div>
@@ -292,7 +304,7 @@ function RecetaForm() {
           </div>
         )}
 
-        <div className="flex justify-between">
+        <div className="flex items-center">
           {currentStep > 1 && (
             <Button
               type="button"
@@ -311,6 +323,7 @@ function RecetaForm() {
               className="px-3 py-2 next-button rounded-md"
               variant="primary"
               style={botonesStyle}
+              disabled={!isStepValid()} // Deshabilitar si el paso no es válido
             >
               Siguiente
             </Button>
@@ -321,6 +334,7 @@ function RecetaForm() {
               className="px-3 py-2 post-button rounded-md"
               variant="success"
               style={botonesStyle}
+              disabled={!isStepValid()} // Deshabilitar si el paso no es válido
             >
               Enviar receta
             </Button>
