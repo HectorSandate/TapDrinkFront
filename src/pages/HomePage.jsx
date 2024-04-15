@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import BarNavi from "../components/HomeNav";
 import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import { useAuth } from "../components/context/AuthContext.jsx";
 
 
 function HomePage() {
-  const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
 
@@ -19,7 +19,6 @@ function HomePage() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from API:", data);
-
         if (Array.isArray(data.recetas)) {
           setRecipes(data.recetas);
         } else {
@@ -27,15 +26,11 @@ function HomePage() {
         }
       })
       .catch((error) => console.error("Error al traer las recetas:", error));
-  }, []); // Solo se ejecuta una vez al montar el componente
+  }, []);
 
   const handleRecipeClick = (recipeId) => {
     navigate(`/detallesReceta/${recipeId}`);
   };
-
-  // const handleEdit = (recipeId) => {
-  //   navigate(`/editReceta/${recipeId}`);
-  // };
 
   const handleDelete = (recipeId, type) => {
     if (type === "temporary") {
@@ -60,6 +55,42 @@ function HomePage() {
           console.log("Receta eliminada permanentemente");
         });
     }
+  };
+
+  const handleFilter = (nombre, categoria) => {
+    let url = 'https://taplibkback.onrender.com/api/recetas/active';
+    if (nombre) {
+      url += `/nombre/${nombre}`;
+    } else if (categoria) {
+      url += `/categoria/${categoria}`;
+    }
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data from API:", data);
+        if (Array.isArray(data)) {
+          setRecipes(data);
+        } else {
+          console.error("Recetas array not found in data:", data);
+        }
+      })
+      .catch((error) => console.error("Error al traer las recetas:", error));
+  };
+
+  const handleClearFilter = () => {
+    // Llama a la API para obtener todas las recetas nuevamente
+    fetch("https://taplibkback.onrender.com/api/recetas/active")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data from API:", data);
+        if (Array.isArray(data.recetas)) {
+          setRecipes(data.recetas);
+        } else {
+          console.error("Recetas array not found in data:", data);
+        }
+      })
+      .catch((error) => console.error("Error al traer las recetas:", error));
   };
 
   if (recipes.length === 0) {
@@ -91,7 +122,7 @@ function HomePage() {
                   {/* Modifica según cómo guardes el nombre en el estado */}
                 </div>
               )}
-              <BebidaFormulario />
+              <BebidaFormulario onFilter={handleFilter} onClearFilter={handleClearFilter} />
              
             </div>
             <div className="recipe-grid">
@@ -119,3 +150,4 @@ function HomePage() {
 }
 
 export default HomePage;
+
