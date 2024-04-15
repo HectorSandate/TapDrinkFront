@@ -39,7 +39,7 @@ function BebidaFormulario({ onFilter, onClearFilter }) {
       <div>
         <div>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pr-56">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 justify-center items-center"> {/* Se han añadido 'justify-center' y 'items-center' para centrar los elementos */}
               <input
                 className="p-2 border border-gray-500 rounded text-black"
                 placeholder="Nombre del Cóctel"
@@ -57,19 +57,21 @@ function BebidaFormulario({ onFilter, onClearFilter }) {
                 <option value="Con alcohol">Con alcohol</option>
                 {/* Agrega otras opciones de categoría según sea necesario */}
               </select>
-              <button
-                type="submit"
-                className="p-2 bg-yellow-500 rounded w-24  text-white hover:bg-yellow-600"
-              >
-                <img src={searchSVG} alt="Buscar" className="w-6 h-6" />
-              </button>
-              <button
-                type="button"
-                onClick={handleClearFilter}
-                className="p-2 bg-gray-500 rounded w-24 grid-cols-1 text-white hover:bg-gray-600"
-              >
-                <img src={filterOffSVG} alt="Limpiar filtro" className="w-6 h-6" />
-              </button>
+              <div className="flex justify-center gap-3 items-center"> {/* Se ha añadido 'flex' para ajustar el espacio entre los botones */}
+                <button
+                  type="submit"
+                  className="p-2 bg-yellow-500 rounded w-28 text-white hover:bg-yellow-600 flex items-center justify-center"
+                >
+                  <img src={searchSVG} alt="Buscar" className="w-6 h-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClearFilter}
+                  className="p-2 bg-gray-500 rounded w-28 text-white hover:bg-gray-600 flex items-center justify-center"
+                >
+                  <img src={filterOffSVG} alt="Limpiar filtro" className="w-6 h-6" />
+                </button>
+              </div>
             </div>
           </form>
         </div>
