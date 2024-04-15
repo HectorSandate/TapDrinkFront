@@ -1,3 +1,4 @@
+// src/context/AuthContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext(null);
@@ -10,23 +11,29 @@ export const AuthProvider = ({ children }) => {
     });
 
     const login = (userData) => {
+        // Configura el usuario en el estado de React
         setUser(userData);
-        // Guardar el usuario en localStorage (elimina solo una línea que setea el objeto completo)
+        localStorage.setItem('user', JSON.stringify({
+            userId: userData.userId,
+            name: userData.name,
+            nivel: userData.nivel
+          }));
+        // Guardar el usuario en localStorage
         localStorage.setItem('user', JSON.stringify(userData));
     };
 
     const logout = () => {
-        setUser(null);  // Limpiar el usuario desde el estado de React
-        localStorage.removeItem('user');  // Eliminar el usuario de localStorage
+        // Limpiar el usuario del estado de React
+        setUser(null);
+        // Eliminar el usuario de localStorage
+        localStorage.removeItem('user');
     };
 
-    // useEffect para mantener el estado del usuario actualizado con localStorage
+    // Asegurarse de mantener el estado del usuario actualizado con localStorage
     useEffect(() => {
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
-            const parsedUser = JSON.parse(savedUser);
-            // Aquí podría añadirse validación para verificar la integridad de `parsedUser`
-            setUser(parsedUser); 
+            setUser(JSON.parse(savedUser));
         }
     }, []);
 
