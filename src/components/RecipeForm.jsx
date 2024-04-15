@@ -2,6 +2,10 @@ import "../css/RecipeForm.css";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../components/context/AuthContext.jsx";
+import { Label } from "./cartaPrueba/ui/label.tsx";
+import { Input } from "./cartaPrueba/ui/input.tsx";
+import { Select } from "./cartaPrueba/ui//Select.tsx";
+import { cn } from "./cartaPrueba/utils/cn.ts";
 
 function RecetaForm() {
   const [formData, setFormData] = useState({
@@ -100,9 +104,15 @@ function RecetaForm() {
 
   const isStepValid = () => {
     if (currentStep === 1) {
-      return formData.nombre !== "" && formData.duracion !== "" && formData.categoria !== "";
+      return (
+        formData.nombre !== "" &&
+        formData.duracion !== "" &&
+        formData.categoria !== ""
+      );
     } else if (currentStep === 2) {
-      return formData.procedimiento.every(paso => paso.paso !== "" && paso.licor !== "" && paso.cantidad !== "");
+      return formData.procedimiento.every(
+        (paso) => paso.paso !== "" && paso.licor !== "" && paso.cantidad !== ""
+      );
     } else {
       return formData.image !== "";
     }
@@ -189,34 +199,28 @@ function RecetaForm() {
         {currentStep === 1 && (
           <div className="flex space-x-4">
             <div>
-              <label htmlFor="nombre" className="block title-style">
-                Nombre de la receta
-              </label>
-              <input
+              <Label htmlFor="nombre">Nombre de la receta</Label>
+              <Input
                 type="text"
                 name="nombre"
                 value={formData.nombre}
                 onChange={handleChange}
-                className="mt-1 block px-3 py-2 rounded-md inputs-style"
+                placeholder="Ingrese el nombre de la receta"
               />
             </div>
             <div>
-              <label htmlFor="duracion" className="block title-style">
-                Duración
-              </label>
-              <input
+              <Label htmlFor="duracion">Duración</Label>
+              <Input
                 type="text"
                 name="duracion"
                 value={formData.duracion}
                 onChange={handleChange}
-                className="mt-1 block px-3 py-2 rounded-md inputs-style"
+                placeholder="Ingrese la duración"
               />
             </div>
             <div>
-              <label htmlFor="categoria" className="block title-style">
-                Categoría
-              </label>
-              <select
+              <Label htmlFor="categoria">Categoría</Label>
+              <Select
                 name="categoria"
                 value={formData.categoria}
                 onChange={handleChange}
@@ -225,29 +229,28 @@ function RecetaForm() {
                 <option value="">Selecciona una categoría</option>
                 <option value="Sin alcohol">Sin alcohol</option>
                 <option value="Con alcohol">Con alcohol</option>
-              </select>
+              </Select>
             </div>
           </div>
         )}
 
         {currentStep === 2 && (
           <div className="space-y-3">
-            <label className="block title-style">Procedimiento</label>
+            <Label>Procedimiento</Label>
             {formData.procedimiento.map((paso, index) => (
               <div key={index} className="flex space-x-2">
-                <input
+                <Input
                   type="text"
                   name="paso"
                   placeholder="Paso"
                   value={paso.paso}
                   onChange={(e) => handleStepChange(index, e)}
-                  className="px-3 py-2 rounded-md inputs-style"
                 />
-                <select
+                <Select
                   name="licor"
                   value={paso.licor}
                   onChange={(e) => handleStepChange(index, e)}
-                  className="px-3 py-2 rounded-md select-style"
+                  className="px-3 py-2  select-style"
                 >
                   <option value="">Selecciona un licor</option>
                   {licores.map((licor) => (
@@ -255,15 +258,14 @@ function RecetaForm() {
                       {licor.nombreLicor}
                     </option>
                   ))}
-                </select>
+                </Select>
 
-                <input
+                <Input
                   type="number"
                   name="cantidad"
                   placeholder="Cantidad (ml)"
                   value={paso.cantidad}
                   onChange={(e) => handleStepChange(index, e)}
-                  className="px-3 py-2 rounded-md inputs-style"
                 />
                 <Button
                   type="button"
@@ -291,10 +293,8 @@ function RecetaForm() {
 
         {currentStep === 3 && (
           <div className="mb-4">
-            <label htmlFor="image" className="block mb-2">
-              Imagen
-            </label>
-            <input
+            <Label htmlFor="image">Imagen</Label>
+            <Input
               type="file"
               id="image"
               name="image"
