@@ -57,29 +57,20 @@ function HomePage() {
   };
 
   const handleDelete = (recipeId, type) => {
-    if (type === "temporary") {
-      // Llama a la API para desactivar la receta
-      fetch(
-        `https://taplibkback.onrender.com/api/recetas/${recipeId}/deactivate`,
-        { method: "PUT" }
-      )
-        .then((res) => res.json())
-        .then(() => {
-          // Actualiza tu estado o UI aquí
-          console.log("Receta desactivada");
-        });
-    } else if (type === "permanent") {
-      // Llama a la API para eliminar la receta permanentemente
-      fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then(() => {
-          // Actualiza tu estado o UI aquí
-          console.log("Receta eliminada permanentemente");
-        });
-    }
-  };
+    const url = `https://taplibkback.onrender.com/api/recetas/${recipeId}${type === 'temporary' ? '/deactivate' : ''}`;
+    fetch(url, {
+        method: type === "temporary" ? "PUT" : "DELETE",
+    })
+    .then((res) => res.json())
+    .then(() => {
+        // Filtra la receta eliminada del estado local para actualizar la UI inmediatamente
+        const updatedRecipes = recipes.filter(recipe => recipe._id !== recipeId);
+        setRecipes(updatedRecipes);  // Actualiza el estado con el nuevo array de recetas
+        console.log(type === "temporary" ? "Receta desactivada" : "Receta eliminada permanentemente");
+    })
+    .catch((error) => console.error("Error al modificar la receta:", error));
+};
+
 
   const handleFilter = (nombre, categoria) => {
     let url = 'https://taplibkback.onrender.com/api/recetas/active';
@@ -171,7 +162,7 @@ function HomePage() {
                   </div>
                 </PinContainer>
               </div>
-\              <BebidaFormulario onFilter={handleFilter} onClearFilter={handleClearFilter} />
+              <BebidaFormulario onFilter={handleFilter} onClearFilter={handleClearFilter} />
             </div>
             <div className="recipe-grid">
               {recipes.slice(0, 3).map((recipe) => (
