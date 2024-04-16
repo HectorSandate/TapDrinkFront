@@ -1,6 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  HashRouter,
+} from "react-router-dom";
 
 import Profile from "./components/Profile";
 
@@ -19,44 +23,47 @@ import RegisterLicor from "./pages/RegisterLicor";
 import Licores from "./pages/LicorPage";
 import LicorDetail from "./pages/LicorDetail";
 import ModificarLicorForm from "./pages/modificarLicor";
-import { AuthProvider } from './components/context/AuthContext';
+import { AuthProvider } from "./components/context/AuthContext";
 
 function App() {
   return (
-
-      <div className="app">
+    <div className="app">
+      <HashRouter>
         <Router>
-        <AuthProvider> {/* Envuelve tus rutas con AuthProvider */}
-          <Routes>
-            <Route exact path="/" element={<Principal />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/user" element={<User />} />
+          <AuthProvider>
+            {" "}
+            {/* Envuelve tus rutas con AuthProvider */}
+            <Routes>
+              <Route exact path="/" element={<Principal />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/user" element={<User />} />
 
-            <Route path="/recetas" element={<RegisterRecipe />} />
-            <Route path="/detallesReceta/:id" element={<RecipeDetail />} />
-            <Route
-              path="/modificarReceta/:recipeId"
-              element={<ModificarRecetaForm />}
-            />
+              <Route path="/recetas" element={<RegisterRecipe />} />
+              <Route path="/detallesReceta/:id" element={<RecipeDetail />} />
+              <Route
+                path="/modificarReceta/:recipeId"
+                element={<ModificarRecetaForm />}
+              />
 
-            <Route path="/inactivos" element={<Inactive />} />
+              <Route path="/inactivos" element={<Inactive />} />
 
-            <Route path="/agregarLicor" element={<RegisterLicor />} />
-            <Route path="/verLicor" element={<Licores />} />
-            <Route path="/detallesLicor/:id" element={<LicorDetail />} />
-            <Route
-              path="/editLicor/:licorId"
-              element={<ModificarLicorForm />}
-            />
+              <Route path="/agregarLicor" element={<RegisterLicor />} />
+              <Route path="/verLicor" element={<Licores />} />
+              <Route path="/detallesLicor/:id" element={<LicorDetail />} />
+              <Route
+                path="/editLicor/:licorId"
+                element={<ModificarLicorForm />}
+              />
 
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-          </AuthProvider> {/* Envuelve tus rutas con AuthProvider */}
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
+          </AuthProvider>{" "}
+          {/* Envuelve tus rutas con AuthProvider */}
         </Router>
-      </div>
-
+      </HashRouter>
+    </div>
   );
 }
 
