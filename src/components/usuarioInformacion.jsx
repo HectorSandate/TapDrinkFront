@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+// UserPage.jsx
+
+import React, { useState } from 'react';
 import '../css/card.css';
 import pfp from '../assets/images/pinfuino.jpeg';
 import { Button } from 'react-bootstrap';
 import { useAuth } from './context/AuthContext';
 import Modal from "../components/modal/Modal.jsx";
-import UserUpdate from "./userUpdate.jsx"
-
+import UserUpdate from "./userUpdate.jsx";
 
 const UserPage = () => {
   const { user, logout } = useAuth(); // Obtener el usuario y el método logout del contexto de autenticación

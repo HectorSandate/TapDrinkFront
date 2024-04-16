@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         // Eliminar el usuario de localStorage
         localStorage.removeItem('user');
+        localStorage.removeItem('email');
     };
 
     // Asegurarse de mantener el estado del usuario actualizado con localStorage
