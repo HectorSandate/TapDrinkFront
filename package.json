@@ -19,6 +19,7 @@
     "bootstrap": "^5.3.3",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.28",
+    "mqtt": "^5.5.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",

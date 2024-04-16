@@ -34,10 +34,7 @@ function RecetaForm() {
   const handleAddStep = () => {
     setFormData({
       ...formData,
-      procedimiento: [
-        ...formData.procedimiento,
-        { paso: "", licor: "", cantidad: "" },
-      ],
+      procedimiento: [...formData.procedimiento, { licor: "", cantidad: "" }],
     });
   };
 
@@ -111,12 +108,13 @@ function RecetaForm() {
       );
     } else if (currentStep === 2) {
       return formData.procedimiento.every(
-        (paso) => paso.paso !== "" && paso.licor !== "" && paso.cantidad !== ""
+        (paso) => paso.licor !== "" && paso.cantidad !== ""
       );
     } else {
       return formData.image !== "";
     }
   };
+  
 
   const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
   return (
@@ -235,22 +233,15 @@ function RecetaForm() {
         )}
 
         {currentStep === 2 && (
-          <div className="space-y-3">
+          <div className="space-y-2">
             <Label>Procedimiento</Label>
             {formData.procedimiento.map((paso, index) => (
               <div key={index} className="flex space-x-2">
-                <Input
-                  type="text"
-                  name="paso"
-                  placeholder="Paso"
-                  value={paso.paso}
-                  onChange={(e) => handleStepChange(index, e)}
-                />
                 <Select
                   name="licor"
                   value={paso.licor}
                   onChange={(e) => handleStepChange(index, e)}
-                  className="px-3 py-2  select-style"
+                  className="px-3 py-2 select-style"
                 >
                   <option value="">Selecciona un licor</option>
                   {licores.map((licor) => (
@@ -290,7 +281,6 @@ function RecetaForm() {
             </Button>
           </div>
         )}
-
         {currentStep === 3 && (
           <div className="mb-4">
             <Label htmlFor="image">Imagen</Label>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import BarNavi from "../components/HomeNav";
+import mqtt from "mqtt";
 import "../css/HomePage.css";
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
@@ -10,12 +11,54 @@ import { PinContainer } from "../components/cartaPrueba/ui/3d-pin.tsx";
 import { useAuth } from "../components/context/AuthContext.jsx";
 import Modal from "../components/modal/Modal.jsx";
 import InactiveRecetas from "../components/inactiveRecetas.jsx";
+import ModificarRecetaForm from "./modifcarReceta.jsx";
 
 function HomePage() {
   const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [client, setClient] = useState(null);
+
+  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+
+  const handleModifyClick = (recipeId) => {
+    setSelectedRecipeId(recipeId);
+    setIsModifyModalOpen(true);
+  };
+
+  const closeModifyModal = () => {
+    setIsModifyModalOpen(false);
+    setSelectedRecipeId(null);
+  };
+
+  useEffect(() => {
+    const mqttClient = mqtt.connect("http://test.mosquitto.org:8080/mqtt');");
+    setClient(mqttClient);
+
+    fetch("https://taplibkback.onrender.com/api/recetas/active")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data from API:", data);
+        if (Array.isArray(data.recetas)) {
+          setRecipes(data.recetas);
+        } else {
+          console.error("Recetas array not found in data:", data);
+        }
+      })
+      .catch((error) => console.error("Error al traer las recetas:", error));
+
+    return () => {
+      mqttClient.end();
+    };
+  }, []);
+
+  const publishProcedimiento = (procedimiento) => {
+    if (client) {
+      client.publish("recetas/procedimiento", procedimiento);
+    }
+  };
 
   const toggleModal = (e) => {
     e.preventDefault(); // Prevenir la navegación del <a> si existe
@@ -57,23 +100,30 @@ function HomePage() {
   };
 
   const handleDelete = (recipeId, type) => {
-    const url = `https://taplibkback.onrender.com/api/recetas/${recipeId}${type === 'temporary' ? '/deactivate' : ''}`;
+    const url = `https://taplibkback.onrender.com/api/recetas/${recipeId}${
+      type === "temporary" ? "/deactivate" : ""
+    }`;
     fetch(url, {
-        method: type === "temporary" ? "PUT" : "DELETE",
+      method: type === "temporary" ? "PUT" : "DELETE",
     })
-    .then((res) => res.json())
-    .then(() => {
+      .then((res) => res.json())
+      .then(() => {
         // Filtra la receta eliminada del estado local para actualizar la UI inmediatamente
-        const updatedRecipes = recipes.filter(recipe => recipe._id !== recipeId);
-        setRecipes(updatedRecipes);  // Actualiza el estado con el nuevo array de recetas
-        console.log(type === "temporary" ? "Receta desactivada" : "Receta eliminada permanentemente");
-    })
-    .catch((error) => console.error("Error al modificar la receta:", error));
-};
-
+        const updatedRecipes = recipes.filter(
+          (recipe) => recipe._id !== recipeId
+        );
+        setRecipes(updatedRecipes); // Actualiza el estado con el nuevo array de recetas
+        console.log(
+          type === "temporary"
+            ? "Receta desactivada"
+            : "Receta eliminada permanentemente"
+        );
+      })
+      .catch((error) => console.error("Error al modificar la receta:", error));
+  };
 
   const handleFilter = (nombre, categoria) => {
-    let url = 'https://taplibkback.onrender.com/api/recetas/active';
+    let url = "https://taplibkback.onrender.com/api/recetas/active";
     if (nombre) {
       url += `/nombre/${nombre}`;
     } else if (categoria) {
@@ -108,9 +158,9 @@ function HomePage() {
       .catch((error) => console.error("Error al traer las recetas:", error));
   };
 
-  if (recipes.length === 0) {
-    return <p>Cargando...</p>;
-  }
+  // if (recipes.length === 0) {
+  //   return <p>Cargando...</p>;
+  // }
   console.log(user);
 
   return (
@@ -141,28 +191,34 @@ function HomePage() {
                   </p>
                 </div>
               )}
-              <div>
-                <PinContainer
-                  title="/ui.aceternity.com"
-                  href="https://twitter.com/mannupaaji"
-                >
-                  <div
-                    onClick={toggleModal}
-                    className="flex basis-full flex-col p-1 tracking-left text-slate-200/50 sm:basis-1/2 w-[15rem] h-[10rem]"
+              {user && user.nivel !== "user" && (
+                <div>
+                  <PinContainer
+                    title="/ui.aceternity.com"
+                    href="https://twitter.com/mannupaaji"
                   >
-                    <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">
-                      Inactivos
-                    </h3>
-                    <div className="text-base !m-0 !p-0 font-normal">
-                      <span className="text-slate-500">
-                        Desplegar elementos inactivos
-                      </span>
+                    <div
+                      onClick={toggleModal}
+                      className="flex basis-full flex-col p-1 tracking-left text-slate-200/50 sm:basis-1/2 w-[15rem] h-[10rem]"
+                    >
+                      <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">
+                        Inactivos
+                      </h3>
+                      <div className="text-base !m-0 !p-0 font-normal">
+                        <span className="text-slate-500">
+                          Desplegar elementos inactivos
+                        </span>
+                      </div>
+                      <div className="flex flex-auto w-full rounded-lg mt-4 bg-gradient-to-br from-yellow-500 via-white-500 to-orange-500" />
                     </div>
-                    <div className="flex flex-auto w-full rounded-lg mt-4 bg-gradient-to-br from-yellow-500 via-white-500 to-orange-500" />
-                  </div>
-                </PinContainer>
-              </div>
-              <BebidaFormulario onFilter={handleFilter} onClearFilter={handleClearFilter} />
+                  </PinContainer>
+                </div>
+              )}
+
+              <BebidaFormulario
+                onFilter={handleFilter}
+                onClearFilter={handleClearFilter}
+              />
             </div>
             <div className="recipe-grid">
               {recipes.slice(0, 3).map((recipe) => (
@@ -172,12 +228,19 @@ function HomePage() {
                     imageUrl={recipe.image.secure_url}
                     title={recipe.nombre}
                     description={recipe.duracion}
-                    onClick={handleRecipeClick}
+                    onModify={handleModifyClick} // Agrega esta línea
                     onDelete={handleDelete}
+                    onPublish={() => publishProcedimiento(recipe.procedimiento)}
                   />
                 </div>
               ))}
             </div>
+            {isModifyModalOpen && (
+              <Modal isOpen={isModifyModalOpen} close={closeModifyModal}>
+                <ModificarRecetaForm recipeId={selectedRecipeId} />
+              </Modal>
+            )}
+            ,
             {isModalOpen && (
               <Modal isOpen={isModalOpen} close={toggleModal}>
                 <InactiveRecetas />

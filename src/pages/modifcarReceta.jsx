@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import '../css/modificarForm.css'; // Asegúrate de ajustar el nombre del archivo de estilos según sea necesario.
+import '../css/modificarForm.css';
 
-function ModificarRecetaForm() {
-  const { recipeId } = useParams();
+function ModificarRecetaForm({ recipeId, closeModal }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: "",
@@ -57,6 +56,7 @@ function ModificarRecetaForm() {
 
       if (response.ok) {
         alert("Receta modificada con éxito");
+        closeModal();
         navigate("/home");
       } else {
         alert("Error al modificar la receta");
@@ -126,7 +126,7 @@ function ModificarRecetaForm() {
                   name="licor"
                   value={paso.licor}
                   onChange={(e) => handleStepChange(index, e)}
-                  className="mt-4  block w-full inputs-style"
+                  className="mt-4 block w-full inputs-style"
                 />
                 <input
                   type="number"
