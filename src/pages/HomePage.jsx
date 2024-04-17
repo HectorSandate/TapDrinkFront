@@ -34,7 +34,8 @@ function HomePage() {
   };
 
   useEffect(() => {
-    const mqttClient = mqtt.connect("http://test.mosquitto.org:8080/mqtt');");
+    // Connect to a secure WebSocket endpoint (WSS) instead of an insecure one
+    const mqttClient = mqtt.connect("wss://test.mosquitto.org:8081/mqtt");
     setClient(mqttClient);
 
     fetch("https://taplibkback.onrender.com/api/recetas/active")
