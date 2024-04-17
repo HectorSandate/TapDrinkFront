@@ -27,8 +27,8 @@ function App() {
   return (
     <div className="app">
       <HashRouter>
-        <Routes>
-          <AuthProvider>
+        <AuthProvider>
+          <Routes>
             <Route exact path="/" element={<Principal />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -36,21 +36,15 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/recetas" element={<RegisterRecipe />} />
             <Route path="/detallesReceta/:id" element={<RecipeDetail />} />
-            <Route
-              path="/modificarReceta/:recipeId"
-              element={<ModificarRecetaForm />}
-            />
+            <Route path="/modificarReceta/:recipeId" element={<ModificarRecetaForm />} />
             <Route path="/inactivos" element={<Inactive />} />
             <Route path="/agregarLicor" element={<RegisterLicor />} />
             <Route path="/verLicor" element={<Licores />} />
             <Route path="/detallesLicor/:id" element={<LicorDetail />} />
-            <Route
-              path="/editLicor/:licorId"
-              element={<ModificarLicorForm />}
-            />
+            <Route path="/editLicor/:licorId" element={<ModificarLicorForm />} />
             <Route path="/profile" element={<Profile />} />
-          </AuthProvider>
-        </Routes>
+          </Routes>
+        </AuthProvider>
       </HashRouter>
     </div>
   );
