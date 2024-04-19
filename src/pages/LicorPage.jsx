@@ -19,6 +19,7 @@ function Licores() {
     e.stopPropagation(); // Detener la propagación para evitar efectos secundarios
     setModalOpen(!isModalOpen);
   };
+
   useEffect(() => {
     fetch("https://taplibkback.onrender.com/api/licores/active")
       .then((response) => response.json())
@@ -31,7 +32,7 @@ function Licores() {
         }
       })
       .catch((error) => console.error("Error al traer los licores:", error));
-  }, []);
+  }, [licor]); // Agrega licor como dependencia del useEffect
 
   const handleRecipeClick = (licorId) => {
     navigate(`/detallesLicor/${licorId}`);
@@ -114,7 +115,7 @@ function Licores() {
                 </div>
               </PinContainer>
             </div>
-            <div className="container">
+            <div className="container mt-12">
               <div className="row">
                 {licor.map((licor) => (
                   <div className="col-md-4" key={licor._id}>

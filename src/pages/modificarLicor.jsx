@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import '../css/modificarForm.css';
+import { Label } from "../components/cartaPrueba/ui/label";
+import { Input } from "../components/cartaPrueba/ui/input";
+
 
 function ModificarLicorForm() {
   const { licorId } = useParams();
@@ -64,27 +67,27 @@ function ModificarLicorForm() {
       <div className="form-box">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="nombreLicor" className="block title-style">
+            <Label htmlFor="nombreLicor" className="block title-style">
               Nombre del licor
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               name="nombreLicor"
               value={formData.nombreLicor}
               onChange={handleChange}
-              className="mt-1 block w-full inputs-style"
+              className="mt-1 block w-full Inputs-style"
             />
           </div>
           <div>
-            <label htmlFor="mililitros" className="block title-style">
+            <Label htmlFor="mililitros" className="block title-style">
                 Mililitros
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               name="mililitros"
               value={formData.mililitros}
               onChange={handleChange}
-              className="mt-1 block w-full inputs-style"
+              className="mt-1 block w-full Inputs-style"
             />
           </div>
           <Button type="submit" variant="primary" className="post-button">
@@ -95,6 +98,8 @@ function ModificarLicorForm() {
     </div>
   );
 }
+
+
 
 export default ModificarLicorForm;
  

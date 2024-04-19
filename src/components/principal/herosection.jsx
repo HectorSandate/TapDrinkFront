@@ -23,7 +23,7 @@ const PaymentComponent = () => {
             "TapDrink: Siente el ritmo, disfruta el sabor, con solo un toque..."
           </p>
           <a
-            href="/login"
+            href="/#/login"
             className="inline-flex items-center justify-center px-5 py-3 mr-12 text-base font-medium text-center text-white rounded-lg bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
           >
             Get started

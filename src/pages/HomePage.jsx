@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import BarNavi from "../components/HomeNav";
 import mqtt from "mqtt";
-import "../css/HomePage.css";
+
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
@@ -181,7 +181,7 @@ function HomePage() {
             ></motion.h1>
           </LampContainer>
 
-          <div className="h-[40rem] w-full flex items-center justify-center"></div>
+      
 
           <div className="overlay-content">
             <div className="search-page">
@@ -193,7 +193,7 @@ function HomePage() {
                 </div>
               )}
               {user && user.nivel !== "user" && (
-                <div>
+                <div >
                   <PinContainer
                     title="/ui.aceternity.com"
                     href="https://twitter.com/mannupaaji"

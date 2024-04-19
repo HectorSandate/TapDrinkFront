@@ -1,4 +1,3 @@
-// Importaciones esenciales
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -7,13 +6,13 @@ import {
   CardItem,
 } from "../components/cartaPrueba/ui/3d-card.tsx";
 import { useAuth } from "../components/context/AuthContext.jsx";
+
 function RecipeCard({
   recipeId,
   imageUrl,
   title,
   description,
   onDelete,
-  onClick,
   onModify,
   onPublish,
 }) {
@@ -22,12 +21,15 @@ function RecipeCard({
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const navigate = useNavigate();
   const modalRef = useRef(null);
-  const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
+  const { user } = useAuth();
 
   const togglePopover = () => setIsModalOpen(!isModalOpen);
 
   const handleModifyClick = () => {
     navigate(`/modificarReceta/${recipeId}`);
+  };
+  const handleCardClick = () => {
+    navigate(`/detallesReceta/${recipeId}`);
   };
 
   const handleDeleteTemp = () => {
@@ -53,7 +55,7 @@ function RecipeCard({
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setIsModalOpen(false);
-        setIsConfirmModalOpen(false); // Close the confirmation modal if open
+        setIsConfirmModalOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -66,7 +68,11 @@ function RecipeCard({
     <>
       <CardContainer className="inter-var">
         <CardBody className="card relative bg-gray-50 dark:bg-black rounded-xl border p-6">
-          <CardItem translateZ="100" className="w-full">
+          <CardItem
+            translateZ="100"
+            className="w-full"
+            onClick={handleCardClick}
+          >
             <img
               src={imageUrl}
               className="card-img-top object-cover rounded-xl h-60 w-full"
@@ -88,17 +94,6 @@ function RecipeCard({
             {description}
           </CardItem>
           <div className="flex justify-between items-center mt-20">
-            {user && user.nivel !== "user" && (
-              <CardItem
-                translateZ={20}
-                as="button"
-                className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
-                onClick={() => onClick(recipeId)}
-              >
-                Ir
-              </CardItem>
-            )}
-
             <CardItem
               translateZ={20}
               as="button"
@@ -107,28 +102,26 @@ function RecipeCard({
             >
               Mandar
             </CardItem>
-            {user &&
-              user.nivel !== "user" &&
-              ((
-                <CardItem
-                  translateZ={20}
-                  as="button"
-                  className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
-                  onClick={() => onModify(recipeId)}
-                >
-                  Modificar
-                </CardItem>
-              ),
-              (
-                <CardItem
-                  translateZ={20}
-                  as="button"
-                  className="px-4 py-2 rounded-xl bg-red-600 dark:bg-yellow-500 text-white dark:text-black txt-xs font-bold"
-                  onClick={togglePopover}
-                >
-                  Eliminar
-                </CardItem>
-              ))}
+            {user && user.nivel !== "user" && (
+              <CardItem
+                translateZ={20}
+                as="button"
+                className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
+                onClick={() => onModify(recipeId)}
+              >
+                Modificar
+              </CardItem>
+            )}
+            {user && user.nivel !== "user" && (
+              <CardItem
+                translateZ={20}
+                as="button"
+                className="px-4 py-2 rounded-xl bg-red-600 dark:bg-yellow-500 text-white dark:text-black txt-xs font-bold"
+                onClick={togglePopover}
+              >
+                Eliminar
+              </CardItem>
+            )}
           </div>
         </CardBody>
       </CardContainer>
