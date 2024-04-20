@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import '../css/modificarForm.css';
 import { Label } from "../components/cartaPrueba/ui/label";
 import { Input } from "../components/cartaPrueba/ui/input";
 
-
-function ModificarRecetaForm({ recipeId, closeModal }) {
-  const navigate = useNavigate();
+function ModificarRecetaForm({ recipeId, close }) {
   const [formData, setFormData] = useState({
     nombre: "",
     procedimiento: [],
     duracion: "",
     categoria: "",
   });
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState(false);
 
   useEffect(() => {
     fetch(`https://taplibkback.onrender.com/api/recetas/active/${recipeId}`)
@@ -28,13 +25,11 @@ function ModificarRecetaForm({ recipeId, closeModal }) {
         });
       })
       .catch((error) => console.error("Error al cargar la receta:", error));
-  }, [recipeId]);
-
+  }, [recipeId, formSubmitted, formError]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
 
   const handleStepChange = (index, e) => {
     const updatedProcedimiento = [...formData.procedimiento];
@@ -45,7 +40,6 @@ function ModificarRecetaForm({ recipeId, closeModal }) {
     setFormData({ ...formData, procedimiento: updatedProcedimiento });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const procedimientoJSON = JSON.stringify(formData.procedimiento);
@@ -55,27 +49,22 @@ function ModificarRecetaForm({ recipeId, closeModal }) {
     formDataToSend.append("duracion", formData.duracion);
     formDataToSend.append("categoria", formData.categoria);
 
-
     try {
       const response = await fetch(`https://taplibkback.onrender.com/api/recetas/${recipeId}`, {
         method: "PUT",
         body: formDataToSend,
       });
 
-
       if (response.ok) {
-        alert("Receta modificada con éxito");
-        closeModal();
-        navigate("/home");
+        setFormSubmitted(true);
       } else {
-        alert("Error al modificar la receta");
+        setFormError(true);
       }
     } catch (error) {
       console.error("Error al modificar la receta:", error);
-      alert("Error al modificar la receta");
+      setFormError(true);
     }
   };
-
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-Input bg-black dark:bg-black">
@@ -128,13 +117,6 @@ function ModificarRecetaForm({ recipeId, closeModal }) {
               </Label>
               <Input
                 type="text"
-                name="paso"
-                value={paso.paso}
-                onChange={(e) => handleStepChange(index, e)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-neutral-300"
-              />
-              <Input
-                type="text"
                 name="licor"
                 value={paso.licor}
                 onChange={(e) => handleStepChange(index, e)}
@@ -150,6 +132,18 @@ function ModificarRecetaForm({ recipeId, closeModal }) {
             </div>
           ))}
         </div>
+        {formSubmitted && (
+        <div role="alert" className="alert alert-success bg-success text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Actualizada Exitosamente</span>
+        </div>
+      )}
+      {formError && (
+        <div role="alert" className="alert alert-error bg-error text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Error al actualizar</span>
+        </div>
+      )}
         <button
           type="submit"
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
@@ -157,14 +151,9 @@ function ModificarRecetaForm({ recipeId, closeModal }) {
           Guardar cambios
         </button>
       </form>
+      
     </div>
   );
- 
- 
-}  
-
+}
 
 export default ModificarRecetaForm;
-
-
-
