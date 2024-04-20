@@ -38,7 +38,7 @@ function InactiveRecetas() {
       <h2 className="text-black">Recetas Inactivas</h2>
       {recetas.map((receta) => (
         <div className="bg-gray-100 p-4" key={receta._id}>
-          <h3 className="font-bold ">{receta.nombre}</h3>
+          <h3 className="font-bold text-black">{receta.nombre}</h3>
           <p className="text-black">{receta.categoria}</p>
           <button
             className="bg-blue-500 text-white p-2 mt-2"

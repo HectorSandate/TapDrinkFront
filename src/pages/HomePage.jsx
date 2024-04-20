@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import BarNavi from "../components/HomeNav";
 import mqtt from "mqtt";
-
 import { useNavigate } from "react-router-dom";
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
@@ -96,10 +95,6 @@ function HomePage() {
       .catch((error) => console.error("Error al traer las recetas:", error));
   }, []);
 
-  const handleRecipeClick = (recipeId) => {
-    navigate(`/detallesReceta/${recipeId}`);
-  };
-
   const handleDelete = (recipeId, type) => {
     const url = `https://taplibkback.onrender.com/api/recetas/${recipeId}${
       type === "temporary" ? "/deactivate" : ""
@@ -168,7 +163,7 @@ function HomePage() {
     <>
       <div className="home-page-container black-background">
         <div className="overlay-container">
-          <LampContainer>
+          <LampContainer className="h-screen w-screen">
             <motion.h1
               initial={{ opacity: 0.5, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -177,11 +172,9 @@ function HomePage() {
                 duration: 0.8,
                 ease: "easeInOut",
               }}
-              className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+              className="mt-12 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
             ></motion.h1>
           </LampContainer>
-
-      
 
           <div className="overlay-content">
             <div className="search-page">
@@ -193,7 +186,7 @@ function HomePage() {
                 </div>
               )}
               {user && user.nivel !== "user" && (
-                <div >
+                <div>
                   <PinContainer
                     title="/ui.aceternity.com"
                     href="https://twitter.com/mannupaaji"

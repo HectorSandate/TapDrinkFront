@@ -14,10 +14,8 @@ function LicorCard({
   description,
   onDelete,
   onClick,
-  onEdit,
   onModify
 }) {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -25,9 +23,11 @@ function LicorCard({
 
   const togglePopover = () => setIsModalOpen(!isModalOpen);
 
-  const handleModifyClick = () => {
-    onEdit(licorId);
+  const handleCardClick = () => {
+    navigate(`/detallesReceta/${licorId}`);
   };
+
+
 
   const handleDeleteTemp = () => {
     onDelete(licorId, "temporary");
@@ -70,6 +70,7 @@ function LicorCard({
               src={imageUrl}
               className="card-img-top object-cover rounded-xl h-60 w-full"
               alt="Licor"
+              onClick={handleCardClick}
             />
           </CardItem>
           <CardItem

@@ -10,6 +10,7 @@ import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 import { ReactComponent as ProfileIcon } from "../assets/icons/profile.svg";
 import "../css/HomeNav.css";
 import { useAuth } from "./context/AuthContext"; // Asegúrate de proporcionar la ruta correcta al contexto de autenticación
+import LicorFormPopover from "../components/registroLicorzz";
 
 const BarNavi = () => {
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
@@ -116,7 +117,7 @@ const BarNavi = () => {
                   <ul className="pl-4">
                     <li>
                       <Nav.Link
-                        href="/agregarLicor"
+                        href= <LicorFormPopover />
                         className="text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         Agregar Licor

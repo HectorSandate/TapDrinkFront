@@ -16,7 +16,6 @@ function RecipeCard({
   onModify,
   onPublish,
 }) {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const navigate = useNavigate();

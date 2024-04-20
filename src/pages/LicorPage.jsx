@@ -1,22 +1,36 @@
 import React, { useState, useEffect } from "react";
 import BarNavi from "../components/HomeNav.jsx";
 import "../css/HomePage.css";
-import { useNavigate } from "react-router-dom";
 import LicorCard from "../components/Licor";
 import { PinContainer } from "../components/cartaPrueba/ui/3d-pin.tsx";
 import Modal from "../components/modal/Modal.jsx";
 import InactiveLicores from "../components/InactiveLicores.jsx";
 import { LampContainer } from "../components/cartaPrueba/ui/lamp.tsx";
 import { motion } from "framer-motion";
+import ModificarLicorForm from "./modificarLicor.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Licores() {
-  const navigate = useNavigate();
   const [licor, setLicor] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
+  const [selectedLicorId, setSelectedLicorId] = useState(null);
+  const navigate = useNavigate();
+
+  const handleModifyClick = (licorId) => {
+    setSelectedLicorId(licorId);
+    setIsModifyModalOpen(true);
+  };
+
+  const closeModifyModal = () => {
+    setIsModifyModalOpen(false);
+    setSelectedLicorId(null);
+  };
+
   const toggleModal = (e) => {
-    e.preventDefault(); // Prevenir la navegación del <a> si existe
-    e.stopPropagation(); // Detener la propagación para evitar efectos secundarios
+    e.preventDefault();
+    e.stopPropagation();
     setModalOpen(!isModalOpen);
   };
 
@@ -32,38 +46,31 @@ function Licores() {
         }
       })
       .catch((error) => console.error("Error al traer los licores:", error));
-  }, [licor]); // Agrega licor como dependencia del useEffect
+  }, [licor]);
 
   const handleRecipeClick = (licorId) => {
     navigate(`/detallesLicor/${licorId}`);
   };
 
-  const handleEdit = (licorId) => {
-    navigate(`/editLicor/${licorId}`);
-  };
 
   const handleDelete = (licorId, type) => {
     if (type === "temporary") {
-      // Llama a la API para desactivar la receta
       fetch(
         `https://taplibkback.onrender.com/api/licores/${licorId}/deactivate`,
         { method: "PUT" }
       )
         .then((res) => res.json())
         .then(() => {
-          // Actualiza tu estado o UI aquí
           alert("Licor desactivado");
           console.log(licorId);
           console.log("Licor desactivada");
         });
     } else if (type === "permanent") {
-      // Llama a la API para eliminar la receta permanentemente
       fetch(`https://taplibkback.onrender.com/api/licores/${licorId}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
         .then(() => {
-          // Actualiza tu estado o UI aquí
           alert("Licor eliminado permanentemente");
           console.log(licorId);
           console.log("Licor eliminada permanentemente");
@@ -79,7 +86,7 @@ function Licores() {
     <>
       <div className="home-page-container black-background">
         <div className="overlay-container">
-          <LampContainer>
+          <LampContainer className="h-screen w-screen" >
             <motion.h1
               initial={{ opacity: 0.5, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -91,8 +98,9 @@ function Licores() {
               className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
             ></motion.h1>
           </LampContainer>
-          <div className="h-[40rem] w-full flex items-center justify-center"></div>
-          <div className="overlay-content">
+         
+          <div className=" overlay-content background">
+          
             <div className="search-page"></div>
             <div>
               <PinContainer
@@ -123,14 +131,20 @@ function Licores() {
                       licorId={licor._id}
                       imageUrl={licor.image.secure_url}
                       title={licor.nombreLicor}
-                      description={licor.mililitros} // o cualquier otra propiedad para 'description'
+                      description={licor.mililitros}
+                      onModify={handleModifyClick}
                       onClick={handleRecipeClick}
                       onDelete={handleDelete}
-                      onEdit={handleEdit} // Pasar la función de eliminación
                     />
                   </div>
                 ))}
               </div>
+              {isModifyModalOpen && (
+                <Modal isOpen={isModifyModalOpen} close={closeModifyModal}>
+                  <ModificarLicorForm licorId={selectedLicorId} />
+                </Modal>
+              )}
+
               {isModalOpen && (
                 <Modal isOpen={isModalOpen} close={toggleModal}>
                   <InactiveLicores />
