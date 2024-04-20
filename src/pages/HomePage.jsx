@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import BarNavi from "../components/HomeNav";
 import mqtt from "mqtt";
-import { useNavigate } from "react-router-dom";
+
 import BebidaFormulario from "../components/HomeSearch";
 import RecipeCard from "../components/Recipe";
 import { motion } from "framer-motion";
@@ -14,13 +14,25 @@ import ModificarRecetaForm from "./modifcarReceta.jsx";
 
 function HomePage() {
   const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
-  const navigate = useNavigate();
+
   const [recipes, setRecipes] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [client, setClient] = useState(null);
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [deleteError, setDeleteError] = useState(false);
+  
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDeleteSuccess(false);
+      setDeleteError(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [deleteSuccess, deleteError]);
 
   const handleModifyClick = (recipeId) => {
     setSelectedRecipeId(recipeId);
@@ -71,7 +83,6 @@ function HomePage() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from API:", data);
-
         if (Array.isArray(data.recetas)) {
           setRecipes(data.recetas);
         } else {
@@ -79,21 +90,7 @@ function HomePage() {
         }
       })
       .catch((error) => console.error("Error al traer las recetas:", error));
-  }, []); // Solo se ejecuta una vez al montar el componente
-
-  useEffect(() => {
-    fetch("https://taplibkback.onrender.com/api/recetas/active")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Data from API:", data);
-        if (Array.isArray(data.recetas)) {
-          setRecipes(data.recetas);
-        } else {
-          console.error("Recetas array not found in data:", data);
-        }
-      })
-      .catch((error) => console.error("Error al traer las recetas:", error));
-  }, []);
+  }, [deleteSuccess, deleteError]);
 
   const handleDelete = (recipeId, type) => {
     const url = `https://taplibkback.onrender.com/api/recetas/${recipeId}${
@@ -109,13 +106,17 @@ function HomePage() {
           (recipe) => recipe._id !== recipeId
         );
         setRecipes(updatedRecipes); // Actualiza el estado con el nuevo array de recetas
+        setDeleteSuccess(true);
         console.log(
           type === "temporary"
             ? "Receta desactivada"
             : "Receta eliminada permanentemente"
         );
       })
-      .catch((error) => console.error("Error al modificar la receta:", error));
+      .catch((error) => {
+        console.error("Error al modificar la receta:", error);
+        setDeleteError(true);
+      });
   };
 
   const handleFilter = (nombre, categoria) => {
@@ -154,9 +155,6 @@ function HomePage() {
       .catch((error) => console.error("Error al traer las recetas:", error));
   };
 
-  // if (recipes.length === 0) {
-  //   return <p>Cargando...</p>;
-  // }
   console.log(user);
 
   return (
@@ -181,7 +179,7 @@ function HomePage() {
               {user && (
                 <div>
                   <p>
-                    Bienvenido, {user.name} NIvel: {user.nivel}
+                    Bienvenido, {user.name} Nivel: {user.nivel}
                   </p>
                 </div>
               )}
@@ -214,6 +212,22 @@ function HomePage() {
                 onClearFilter={handleClearFilter}
               />
             </div>
+            {deleteSuccess && (
+              <div className="absolute top-43 right-0 mr-4">
+                <div role="alert" className="alert alert-success bg-success h-15 w-60" onClick={() => setDeleteSuccess(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Eliminada/Inactivada Exitosamente</span>
+                </div>
+              </div>
+            )}
+            {deleteError && (
+              <div>
+                <div role="alert" className="alert alert-error bg-error h-15 w-60" onClick={() => setDeleteError(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Error al eliminar/inactivar</span>
+                </div>
+              </div>
+            )}
             <div className="recipe-grid">
               {recipes.slice(0, 3).map((recipe) => (
                 <div key={recipe._id}>

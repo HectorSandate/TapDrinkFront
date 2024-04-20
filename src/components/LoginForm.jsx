@@ -73,7 +73,7 @@ const Login = () => {
               <Form.Control type="password" placeholder="Contraseña" name="password" value={password} onChange={handleInputChange} />
             </FloatingLabel>
             <br />
-            <Button className="col-md-12 custom-button" variant="warning" style={buttonStyle} type="submit" disabled={isButtonDisabled}>Iniciar Sesión</Button>
+            <Button className="col-md-12 custom-button" variant="warning" style={buttonStyle} type="submit">Iniciar Sesión</Button>
 
           </Form>
           <hr className="separator-style" />

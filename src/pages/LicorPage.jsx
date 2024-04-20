@@ -13,6 +13,17 @@ import { useNavigate } from "react-router-dom";
 function Licores() {
   const [licor, setLicor] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [deleteError, setDeleteError] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDeleteSuccess(false);
+      setDeleteError(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [deleteSuccess, deleteError]);
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [selectedLicorId, setSelectedLicorId] = useState(null);
@@ -46,7 +57,7 @@ function Licores() {
         }
       })
       .catch((error) => console.error("Error al traer los licores:", error));
-  }, [licor]);
+  }, [licor,deleteSuccess, deleteError]);
 
   const handleRecipeClick = (licorId) => {
     navigate(`/detallesLicor/${licorId}`);
@@ -61,8 +72,6 @@ function Licores() {
       )
         .then((res) => res.json())
         .then(() => {
-          alert("Licor desactivado");
-          console.log(licorId);
           console.log("Licor desactivada");
         });
     } else if (type === "permanent") {
@@ -71,8 +80,7 @@ function Licores() {
       })
         .then((res) => res.json())
         .then(() => {
-          alert("Licor eliminado permanentemente");
-          console.log(licorId);
+          // Actualiza tu estado o UI aquí
           console.log("Licor eliminada permanentemente");
         });
     }
@@ -123,6 +131,22 @@ function Licores() {
                 </div>
               </PinContainer>
             </div>
+            {deleteSuccess && (
+              <div className="absolute top-43 right-0 mr-4">
+                <div role="alert" className="alert alert-success bg-success text-white h-15 w-60" onClick={() => setDeleteSuccess(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Eliminada/Inactivada Exitosamente</span>
+                </div>
+              </div>
+            )}
+            {deleteError && (
+              <div>
+                <div role="alert" className="alert alert-error bg-error text-white h-15 w-60" onClick={() => setDeleteError(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Error al eliminar/inactivar</span>
+                </div>
+              </div>
+            )}
             <div className="container mt-12">
               <div className="row">
                 {licor.map((licor) => (
