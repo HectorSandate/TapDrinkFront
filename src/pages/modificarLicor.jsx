@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import '../css/modificarForm.css';
 import { Label } from "../components/cartaPrueba/ui/label";

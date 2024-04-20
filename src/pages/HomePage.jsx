@@ -191,7 +191,7 @@ function HomePage() {
                   >
                     <div
                       onClick={toggleModal}
-                      className="flex basis-full flex-col p-1 tracking-left text-slate-200/50 sm:basis-1/2 w-[15rem] h-[10rem]"
+                      className="flex basis-full flex-col p-1 tracking-left text-slate-200/50 sm:basis-1/2 w-[12rem] h-[10rem] p-2"
                     >
                       <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">
                         Inactivos

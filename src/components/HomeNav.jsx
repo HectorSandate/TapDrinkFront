@@ -8,8 +8,8 @@ import { ReactComponent as RecipeIcon } from "../assets/icons/recipe.svg";
 import { ReactComponent as LiquorIcon } from "../assets/icons/liquor.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 import { ReactComponent as ProfileIcon } from "../assets/icons/profile.svg";
+import { useAuth } from "../components/context/AuthContext.jsx";
 import "../css/HomeNav.css";
-import { useAuth } from "./context/AuthContext";
 import Modal from "../components/modal/Modal";
 import LicorFormPopover from "../components/registroLicorzz";
 
@@ -48,7 +48,7 @@ const BarNavi = () => {
     >
       <Container fluid>
         <Navbar.Brand>
-          <Image alt="logo" src={logo} className="logoStyle align-top" />
+          <Image alt="logo" src={logo} className="logoStyle mt-2" />
         </Navbar.Brand>
         <button
           className="text-black font-medium rounded-lg text-sm px-5 py-1.5 ps-8 focus:outline-none"
@@ -60,7 +60,7 @@ const BarNavi = () => {
 
         <div
           id="drawer-backdrop"
-          className={`fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
+          className={`fixed top-5 left-2 bottom-5 rounded-lg p-1 w-1/6 overflow-y-auto transition-transform ${
             isDrawerOpen ? "translate-x-0" : "-translate-x-full"
           } w-64 dark:bg-gray-800`}
           tabIndex="-1"
@@ -85,19 +85,22 @@ const BarNavi = () => {
                 href="/home"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <HomeIcon className="w-5 h-5" />
-                <span className="ms-3">Inicio</span>
+                <div className="flex items-center">
+                  <HomeIcon className="w-5 h-5 mr-3" />
+                  <span className="flex-1 text-left">Inicio</span>
+                </div>
               </Nav.Link>
             </li>
-
             {user && user.nivel !== "user" && (
               <li>
                 <Nav.Link
                   href="/recetas"
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  className="flex items-center p-2 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group "
                 >
-                  <RecipeIcon className="w-5 h-5" />
-                  <span className="ms-3">Ingresar Receta</span>
+                  <div className="flex items-center">
+                    <RecipeIcon className="w-5 h-5 mr-3" />
+                    <span className="flex-1 text-left">Ingresar Receta</span>
+                  </div>
                 </Nav.Link>
               </li>
             )}
@@ -152,8 +155,10 @@ const BarNavi = () => {
                 href="/user"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <ProfileIcon className="w-5 h-5" />
-                <span className="ms-3">Perfil</span>
+                <div className="flex items-center">
+                  <ProfileIcon className="w-5 h-5 mr-3 " />
+                  <span className="flex-1 text-left">Perfil</span>
+                </div>
               </Nav.Link>
             </li>
             <li>
@@ -162,9 +167,28 @@ const BarNavi = () => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 onClick={handleLogout}
               >
-                <LogoutIcon className="w-5 h-5" />
-                <span className="ms-3">Log out</span>
+                <div className="flex items-center">
+                  <LogoutIcon className="w-5 h-5 mr-3" />
+                  <span className="flex-1 text-left">Log out</span>
+                </div>
               </Nav.Link>
+            </li>
+
+            <li className="mt-auto">
+              <div className="flex -space-x-1 pl-4 overflow-hidden">
+                <img
+                  className="mt-[450px] inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                  src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+                {user && (
+                  <div className="mt-[450px] pl-4 text-gray-900 rounded-lg dark:text-white">
+                    <p>
+                      Bienvenido, {user.name} - Nivel: {user.nivel}
+                    </p>
+                  </div>
+                )}
+              </div>
             </li>
           </ul>
         </div>
