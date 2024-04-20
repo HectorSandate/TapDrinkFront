@@ -5,18 +5,22 @@ import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "../assets/icons/CloseIcon.svg";
 import { ReactComponent as HomeIcon } from "../assets/icons/home.svg";
 import { ReactComponent as RecipeIcon } from "../assets/icons/recipe.svg";
-import { ReactComponent as LiquorIcon } from "../assets/icons/liquor.svg"; // Asumiendo que tienes un ícono para licor
+import { ReactComponent as LiquorIcon } from "../assets/icons/liquor.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 import { ReactComponent as ProfileIcon } from "../assets/icons/profile.svg";
 import "../css/HomeNav.css";
-import { useAuth } from "./context/AuthContext"; // Asegúrate de proporcionar la ruta correcta al contexto de autenticación
+import { useAuth } from "./context/AuthContext";
+import Modal from "../components/modal/Modal";
 import LicorFormPopover from "../components/registroLicorzz";
 
 const BarNavi = () => {
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // Estado para controlar el desplegable de licor.
-  const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
+  const [isOpen, setIsOpen] = useState(false);
+  const [showLicorModal, setShowLicorModal] = useState(false);
+  const { user } = useAuth();
+  const { logout } = useAuth();
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -25,10 +29,16 @@ const BarNavi = () => {
     setIsOpen(!isOpen);
   };
 
-  const { logout } = useAuth();
-
   const handleLogout = () => {
     logout();
+  };
+
+  const openLicorModal = () => {
+    setShowLicorModal(true);
+  };
+
+  const closeLicorModal = () => {
+    setShowLicorModal(false);
   };
 
   return (
@@ -117,8 +127,9 @@ const BarNavi = () => {
                   <ul className="pl-4">
                     <li>
                       <Nav.Link
-                        href= <LicorFormPopover />
+                        href="#"
                         className="text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600"
+                        onClick={openLicorModal}
                       >
                         Agregar Licor
                       </Nav.Link>
@@ -158,6 +169,10 @@ const BarNavi = () => {
           </ul>
         </div>
       </Container>
+
+      <Modal isOpen={showLicorModal} close={closeLicorModal}>
+        <LicorFormPopover />
+      </Modal>
     </Navbar>
   );
 };
