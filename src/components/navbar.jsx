@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/images/logo-horizontal.png';
+import logo from "../assets/images/iconOther.png";
 import '../css/forms.css';
 
 function BarNavigator() {
@@ -24,11 +24,11 @@ function BarNavigator() {
   return (
     <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''}`}>
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <img
             src={logo}
-            width="150"
-            height="130"
+            width="160"
+            height="120"
             className="d-inline-block align-top"
             alt="Logo"
           />
