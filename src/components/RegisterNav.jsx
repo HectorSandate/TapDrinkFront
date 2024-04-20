@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import logo from '../assets/images/logo-horizontal.png';
+import logo from "../assets/images/iconOther.png";
 import { useNavigate } from 'react-router-dom'; 
 import '../css/forms.css';
 
@@ -25,11 +25,11 @@ function BarNavi() {
   return (
     <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''}`}>
       <Container>
-        <Navbar.Brand href="/">
+        <Navbar.Brand>
         <img
             src={logo}
-            width="150"
-            height="130"
+            width="160"
+            height="120"
             className="d-inline-block align-top"
             alt="Logo"
           />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
-import logo from "../assets/images/logo-horizontal.png";
+import logo from "../assets/images/iconOther.png";
 import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "../assets/icons/CloseIcon.svg";
 import { ReactComponent as HomeIcon } from "../assets/icons/home.svg";
@@ -47,7 +47,7 @@ const BarNavi = () => {
       className={`${isNavbarTransparent ? "bg-transparent" : ""}`}
     >
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand>
           <Image alt="logo" src={logo} className="logoStyle align-top" />
         </Navbar.Brand>
         <button

@@ -54,9 +54,6 @@ function InactiveLicores({ onActivate }) {
     );  
       
   }
-  
-  
-
   return (
     <div className="grid grid-cols-3 gap-4">
       <h2 className='text-black'>Licores Inactivos</h2>
