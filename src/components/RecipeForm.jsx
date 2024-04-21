@@ -20,12 +20,16 @@ function RecetaForm() {
   const [licores, setLicor] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
 
+  const [recetaSuccess, setRecetaSuccess] = useState(false);
+  const [recetaError, setRecetaError] = useState(false);
+
+
   useEffect(() => {
     fetch("https://taplibkback.onrender.com/api/licores/active")
       .then((response) => response.json())
       .then((data) => setLicor(data.licor))
       .catch((error) => console.error("Error al cargar licores:", error));
-  }, []);
+  }, [recetaSuccess, recetaError]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -81,13 +85,13 @@ function RecetaForm() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        alert("Receta enviada con éxito");
+        setRecetaSuccess(true);
       } else {
-        alert("Error al enviar la receta");
+        setRecetaError(true);
       }
     } catch (error) {
       console.error("Error al enviar la receta:", error);
-      alert("Error al enviar la receta");
+      setRecetaError(true);
     }
   };
 
@@ -127,7 +131,6 @@ function RecetaForm() {
         {user && (
           <div>
             <p>Bienvenido, {user.name}</p>{" "}
-            {/* Modifica según cómo guardes el nombre en el estado */}
           </div>
         )}
         <ol className="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
@@ -202,7 +205,7 @@ function RecetaForm() {
           {currentStep === 1 && (
             <div className="flex space-x-4">
               <div>
-                <Label htmlFor="nombre">Nombre de la receta</Label>
+                <Label htmlFor="nombre" className="text-white">Nombre de la receta</Label>
                 <Input
                   type="text"
                   name="nombre"
@@ -212,7 +215,7 @@ function RecetaForm() {
                 />
               </div>
               <div>
-                <Label htmlFor="duracion">Duración</Label>
+                <Label htmlFor="duracion" className="text-white">Duración</Label>
                 <Input
                   type="text"
                   name="duracion"
@@ -222,7 +225,7 @@ function RecetaForm() {
                 />
               </div>
               <div>
-                <Label htmlFor="categoria">Categoría</Label>
+                <Label htmlFor="categoria" className="text-white">Categoría</Label>
                 <Select
                   name="categoria"
                   value={formData.categoria}
@@ -239,7 +242,7 @@ function RecetaForm() {
 
           {currentStep === 2 && (
             <div className="space-y-2">
-              <Label>Procedimiento</Label>
+              <Label  className="text-white">Procedimiento</Label>
               {formData.procedimiento.map((paso, index) => (
                 <div key={index} className="flex space-x-2">
                   <Select
@@ -288,7 +291,7 @@ function RecetaForm() {
           )}
           {currentStep === 3 && (
             <div>
-              <Label htmlFor="image">Imagen</Label>
+              <Label htmlFor="image"  className="text-white">Imagen</Label>
               <input
                 type="file"
                 id="image"
@@ -336,6 +339,22 @@ function RecetaForm() {
             )}
           </div>
         </form>
+            {recetaSuccess && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-success bg-success text-white h-15 w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Receta Agregada Exitosamente</span>
+                </div>
+            </div> 
+            )}
+            {recetaError && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-error bg-error text-white h-15 w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Error al ingresar receta</span>
+                </div>
+              </div>
+            )}
       </div>
       <div className="w-1/4 ml-4">
         <div className="card w-96 bg-base-100 shadow-xl">

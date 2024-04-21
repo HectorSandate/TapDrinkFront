@@ -15,6 +15,9 @@
   }
   .card-user{
     position: fixed;
-    left: 18%;
-    top: 20%;
+    left: 30.5%;
+    top: 21%;
+    width: 800px;
+    box-shadow: 5px 5px 15px #ffc107;
+    border-radius: 8px;
   }

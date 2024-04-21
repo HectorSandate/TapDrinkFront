@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Card, Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useAuth } from '../components/context/AuthContext';
 import "../css/forms.css";
@@ -10,6 +9,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -28,20 +31,25 @@ const Login = () => {
         console.log("Received user ID:", nivel);  
         
         login({ token, userId, email, name,  nivel });  
-        toast.success("Inicio de sesión exitoso");
+      setLoginSuccess(true);
+      setTimeout(() => {
         navigate("/home");
+      }, 2000);
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
+      setLoginError(true);
       if (error.response) {
         const { status, data } = error.response;
         if (status === 401) {
-          toast.error(data.message);
+          console.log(data.message);
         } else {
-          toast.error("Error al iniciar sesión. Por favor, verifica tus datos.");
+          console.log("Error al iniciar sesión. Por favor, verifica tus datos.");
+          setLoginError(true);
         }
       } else {
-        toast.error("Error al comunicarse con el servidor.");
+        console.log("Error al comunicarse con el servidor.");
+        alert(`Error del servidor`)
       }
     }
   };
@@ -60,7 +68,6 @@ const Login = () => {
   const buttonStyle = { fontFamily: "Roboto Mono, monospace" };
   return (
     <div>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
       <Card className="col-md-4" style={{ background: "black" }}>
         <Card.Header className="text-center" style={headerStyle}>TapDrink</Card.Header>
         <Card.Text className="text-center card-text-style">¡Bienvenido de nuevo!</Card.Text>
@@ -83,6 +90,22 @@ const Login = () => {
           </div>
         </Card.Body>
       </Card>
+            {loginSuccess && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-success bg-success text-white h-15 w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Login Exitoso</span>
+                </div>
+            </div> 
+            )}
+            {loginError && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-error bg-error text-white h-15 w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Error al Logear</span>
+                </div>
+              </div>
+            )}
     </div>
   );
 };

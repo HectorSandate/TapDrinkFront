@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import '../css/modificarForm.css';
 import { Label } from "../components/cartaPrueba/ui/label";
 import { Input } from "../components/cartaPrueba/ui/input";
 
 
 function ModificarLicorForm({ licorId, closeModal }) {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombreLicor: '',
     mililitros: '',
   });
+
+  const [licorSuccess, setLicorSuccess] = useState(false);
+  const [licorError, setLicorError] = useState(false);
+
+
+  // Estado para controlar si el formulario es válido
+  const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
     const fetchLicor = async () => {
@@ -35,6 +39,21 @@ function ModificarLicorForm({ licorId, closeModal }) {
     fetchLicor();
   }, [licorId]);
 
+  const validateForm = () => {
+    if (
+      formData.nombreLicor.trim() !== '' &&
+      formData.mililitros.trim() !== ''
+    ) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  };
+
+  useEffect(() => {
+    validateForm(); // Verificar el formulario cada vez que cambien los datos
+  }, [formData, licorSuccess, licorError]);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,22 +72,36 @@ function ModificarLicorForm({ licorId, closeModal }) {
       });
 
       if (response.ok) {
-        alert("Licor modificado con éxito");
-        closeModal();
-        navigate("/home");
+        setLicorSuccess(true);
       } else {
-        alert("Error al modificar el licor");
+        setLicorError(true);
       }
     } catch (error) {
       console.error("Error al modificar el licor:", error);
-      alert("Error al modificar el licor");
+      setLicorError(true);
     }
   };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-Input bg-black dark:bg-black">
-      <div className="form-box">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">Actualizar Licor</h2>
+      {licorSuccess && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-success bg-success text-white h-15 w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Datos Actualizados Exitosamente</span>
+                </div>
+            </div> 
+            )}
+            {licorError && (
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-error bg-error text-white h-15 w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Error al actualizar datos</span>
+                </div>
+              </div>
+            )}
+        <form onSubmit={handleSubmit} className="my-8 space-y-4">
           <div>
             <Label htmlFor="nombreLicor" className="block text-neutral-700 dark:text-neutral-300 font-medium mb-1">
               Nombre del licor
@@ -93,11 +126,14 @@ function ModificarLicorForm({ licorId, closeModal }) {
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-neutral-300"
             />
           </div>
-          <Button type="submit" variant="primary" className="post-button">
+          <button 
+            type="submit"
+            className={`bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] ${formValid ? 'hover:from-blue-700' : 'opacity-50 cursor-not-allowed'}`} 
+            disabled={!formValid}
+          >
             Guardar cambios
-          </Button>
+          </button>
         </form>
-      </div>
     </div>
 
 

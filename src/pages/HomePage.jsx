@@ -213,16 +213,16 @@ function HomePage() {
               />
             </div>
             {deleteSuccess && (
-              <div className="absolute top-43 right-0 mr-4">
-                <div role="alert" className="alert alert-success bg-success h-15 w-60" onClick={() => setDeleteSuccess(false)}>
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-success bg-success text-white h-15 w-100" onClick={() => setDeleteSuccess(false)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <span>Eliminada/Inactivada Exitosamente</span>
                 </div>
               </div>
             )}
             {deleteError && (
-              <div>
-                <div role="alert" className="alert alert-error bg-error h-15 w-60" onClick={() => setDeleteError(false)}>
+              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+                <div role="alert" className="alert alert-error bg-error text-white h-15 w-100" onClick={() => setDeleteError(false)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <span>Error al eliminar/inactivar</span>
                 </div>

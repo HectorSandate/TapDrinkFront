@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import searchSVG from '../assets/icons/search.svg'; // Importa el archivo SVG
 import filterOffSVG from '../assets/icons/filterOff.svg'; // Importa el archivo SVG
+import { Input } from './cartaPrueba/ui/input.tsx';
+import { Select } from './cartaPrueba/ui/Select.tsx';
 
 function BebidaFormulario({ onFilter, onClearFilter }) {
   const [nombre, setNombre] = useState('');
@@ -39,15 +41,15 @@ function BebidaFormulario({ onFilter, onClearFilter }) {
       <div>
         <div>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 justify-center items-center"> {/* Se han añadido 'justify-center' y 'items-center' para centrar los elementos */}
-              <input
-                className="p-2 border border-gray-500 rounded text-black"
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 justify-center items-center"> 
+              <Input
+                className="text-white"
                 placeholder="Nombre del Cóctel"
                 value={nombre}
                 onChange={handleNombreChange}
               />
-              <select
-                className="p-2 border border-gray-500 rounded bg-white text-black"  
+              <Select
+                className="text-white"  
                 aria-label="Filtrar"
                 value={categoria}
                 onChange={handleCategoriaChange}
@@ -55,9 +57,8 @@ function BebidaFormulario({ onFilter, onClearFilter }) {
                 <option value="">Filtrar por categoría</option>
                 <option value="Sin alcohol">Sin alcohol</option>
                 <option value="Con alcohol">Con alcohol</option>
-                {/* Agrega otras opciones de categoría según sea necesario */}
-              </select>
-              <div className="flex justify-center gap-3 items-center"> {/* Se ha añadido 'flex' para ajustar el espacio entre los botones */}
+              </Select>
+              <div className="flex justify-center gap-3 items-center">
                 <button
                   type="submit"
                   className="p-2 bg-yellow-500 rounded w-28 text-white hover:bg-yellow-600 flex items-center justify-center"
