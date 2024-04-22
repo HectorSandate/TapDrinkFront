@@ -1,6 +1,7 @@
 // LicorCard.js
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import QRCode from "qrcode.react"; // Importar el componente QRCode
 import {
   CardBody,
   CardContainer,
@@ -18,6 +19,7 @@ function LicorCard({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false); // Nuevo estado para controlar el modal del QR
   const navigate = useNavigate();
   const modalRef = useRef(null);
 
@@ -26,8 +28,6 @@ function LicorCard({
   const handleCardClick = () => {
     navigate(`/detallesReceta/${licorId}`);
   };
-
-
 
   const handleDeleteTemp = () => {
     onDelete(licorId, "temporary");
@@ -48,11 +48,14 @@ function LicorCard({
     setIsConfirmModalOpen(false);
   };
 
+  const toggleQRModal = () => setIsQRModalOpen(!isQRModalOpen); // Función para abrir/cerrar el modal del QR
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setIsModalOpen(false);
         setIsConfirmModalOpen(false); // Close the confirmation modal if open
+        setIsQRModalOpen(false); // Close the QR modal if open
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -96,6 +99,15 @@ function LicorCard({
             >
               Ver licor
             </CardItem>
+            {/* Botón para ver el QR */}
+            <CardItem
+              translateZ={20}
+              as="button"
+              className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
+              onClick={toggleQRModal}
+            >
+              Ver QR
+            </CardItem>
             <CardItem
               translateZ={20}
               as="button"
@@ -115,6 +127,23 @@ function LicorCard({
           </div>
         </CardBody>
       </CardContainer>
+      {/* Modal para mostrar el QR */}
+      {isQRModalOpen && (
+        <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
+          <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
+            <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
+              QR del registro
+            </h3>
+            <QRCode value={licorId} /> {/* Generar el QR con el ID del licor */}
+            <button
+              onClick={toggleQRModal}
+              className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
       {isModalOpen && (
         <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
           <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
