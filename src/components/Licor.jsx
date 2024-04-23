@@ -9,7 +9,6 @@ import {
 } from "../components/cartaPrueba/ui/3d-card.tsx";
 
 function LicorCard({
-  nombreLicor,
   licorId,
   imageUrl,
   title,
@@ -135,7 +134,7 @@ function LicorCard({
             <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
               QR del registro
             </h3>
-            <QRCode value={nombreLicor} /> {/* Generar el QR con el ID del licor */}
+            <QRCode value={licorId} /> {/* Generar el QR con el ID del licor */}
             <button
               onClick={toggleQRModal}
               className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3"
