@@ -66,6 +66,14 @@ function LicorCard({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
+  const downloadQRCode = () => {
+    const link = document.createElement('a');
+    link.href = qr;
+    link.download = 'qr_code.png';
+    link.click();
+  };
+  
 
   return (
     <>
@@ -132,21 +140,35 @@ function LicorCard({
       </CardContainer>
       {/* Modal para mostrar el QR */}
       {isQRModalOpen && (
-        <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
-          <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
-            <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
-              QR del registro
-            </h3>
-            <img src={qr} alt="QR Code" /> {/* Mostrar la imagen del código QR */}
-            <button
-              onClick={toggleQRModal}
-              className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      )}
+  <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
+    <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
+      <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
+        QR del registro
+      </h3>
+      <img src={qr} alt="QR Code" />
+      <div className="mt-4">
+        <button
+          onClick={() => window.print()}
+          className="block bg-blue-500 text-white px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 mr-2"
+        >
+          Imprimir
+        </button>
+        <button
+          onClick={downloadQRCode}
+          className="block bg-green-500 text-white px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-green-300 mt-2"
+        >
+          Descargar
+        </button>
+      </div>
+      <button
+        onClick={toggleQRModal}
+        className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-4"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+)}
       {isModalOpen && (
         <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
           <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
