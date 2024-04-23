@@ -13,18 +13,21 @@ function LicorCard({
   imageUrl,
   title,
   description,
+  qr,
   onDelete,
   onClick,
-  onModify
+  onModify,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isQRModalOpen, setIsQRModalOpen] = useState(false); // Nuevo estado para controlar el modal del QR
   const navigate = useNavigate();
   const modalRef = useRef(null);
-
   const togglePopover = () => setIsModalOpen(!isModalOpen);
 
+
+
+  
   const handleCardClick = () => {
     navigate(`/detallesReceta/${licorId}`);
   };
@@ -134,7 +137,7 @@ function LicorCard({
             <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
               QR del registro
             </h3>
-            <QRCode value={licorId} /> {/* Generar el QR con el ID del licor */}
+            <img src={qr} alt="QR Code" /> {/* Mostrar la imagen del código QR */}
             <button
               onClick={toggleQRModal}
               className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3"

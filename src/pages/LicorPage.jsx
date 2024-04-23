@@ -156,6 +156,7 @@ function Licores() {
                       licorId={licor._id}
                       imageUrl={licor.image.secure_url}
                       title={licor.nombreLicor}
+                      qr={licor.qr}
                       description={licor.mililitros}
                       onModify={handleModifyClick}
                       onClick={handleRecipeClick}
