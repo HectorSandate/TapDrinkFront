@@ -64,8 +64,7 @@ const Leadership = () => {
             Conoce a nuestro liderazgo
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae elementum enim vitae ullamcorper
-            suspendisse.
+            Equipo de trabajo de TapDrink
           </p>
         </div>
         <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
@@ -77,7 +76,7 @@ const Leadership = () => {
                   <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                     {person.name}
                   </h3>
-                  <p className="text-sm font-semibold leading-6 text-indigo-600">
+                  <p className="text-sm font-semibold leading-6 text-indigo-600 text-yellow-500" >
                     {person.role}
                   </p>
                 </div>
