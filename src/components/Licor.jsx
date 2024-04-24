@@ -102,14 +102,7 @@ function LicorCard({
             {description}
           </CardItem>
           <div className="flex justify-between items-center mt-20">
-            <CardItem
-              translateZ={20}
-              as="button"
-              className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
-              onClick={() => onClick(licorId)}
-            >
-              Ver licor
-            </CardItem>
+     
             {/* Botón para ver el QR */}
             <CardItem
               translateZ={20}
