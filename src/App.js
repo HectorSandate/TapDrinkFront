@@ -22,6 +22,8 @@ import Licores from "./pages/LicorPage";
 import LicorDetail from "./pages/LicorDetail";
 import ModificarLicorForm from "./pages/modificarLicor";
 import { AuthProvider } from "./components/context/AuthContext";
+import Bebida from "./pages/ProcessPage";
+
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
             <Route path="/detallesLicor/:id" element={<LicorDetail />} />
             <Route path="/editLicor/:licorId" element={<ModificarLicorForm />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/bebida" element={<Bebida />} />
           </Routes>
         </AuthProvider>
       </HashRouter>
