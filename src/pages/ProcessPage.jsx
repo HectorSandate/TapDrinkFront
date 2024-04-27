@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import mqtt from 'mqtt';
 import LiquidFillChart from '../components/LiquitProcess'; // Make sure to import the chart component
+import { SparklesCore } from "../components/cartaPrueba/ui/sparkles.tsx";
 
-function Bebida() {
+function Bebida({ onClose }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -26,12 +27,17 @@ function Bebida() {
   }, []);
 
   return (
-    <div style={{ margin: '20px' }}>
-      <LiquidFillChart percentage={progress} />
-      <div style={{ textAlign: 'center', marginTop: '10px' }}>
-        {progress.toFixed(2)}%
+
+    <div style={{ margin: "20px" }}>
+      <div>
+        <h2 className='text-black'>Su bebida esta en proceso </h2>
       </div>
+    <LiquidFillChart percentage={progress} />
+    <div style={{ textAlign: "center", marginTop: "10px" }}>
+      {progress.toFixed(2)}%
     </div>
+    <button className='text-black' onClick={onClose}>Cerrar</button>
+  </div>
   );
 }
 

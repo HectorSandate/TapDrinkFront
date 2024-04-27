@@ -6,6 +6,7 @@ import {
   CardItem,
 } from "../components/cartaPrueba/ui/3d-card.tsx";
 import { useAuth } from "../components/context/AuthContext.jsx";
+import Bebida from "../pages/ProcessPage.jsx"; // Importa el componente Bebida
 
 function RecipeCard({
   recipeId,
@@ -21,8 +22,14 @@ function RecipeCard({
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const { user } = useAuth();
+  const [showBebida, setShowBebida] = useState(false);
 
   const togglePopover = () => setIsModalOpen(!isModalOpen);
+
+  const handleCloseBebida = () => {
+    setShowBebida(false);
+    navigate("/home"); // Navega a la ruta de la página principal
+  };
 
   const handleModifyClick = () => {
     navigate(`/modificarReceta/${recipeId}`);
@@ -48,6 +55,11 @@ function RecipeCard({
 
   const handleCloseConfirmModal = () => {
     setIsConfirmModalOpen(false);
+  };
+
+  const handlePublish = () => {
+    onPublish();
+    setShowBebida(true);
   };
 
   useEffect(() => {
@@ -97,7 +109,7 @@ function RecipeCard({
               translateZ={20}
               as="button"
               className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
-              onClick={onPublish}
+              onClick={handlePublish}
             >
               Mandar
             </CardItem>
@@ -137,7 +149,7 @@ function RecipeCard({
               onClick={handleDeleteTemp}
               className="block bg-red-600 text-white px-5 py-2.5 rounded-lg mr-3 focus:outline-none focus:ring-4 focus:ring-red-300"
             >
-             Eliminar Temporalmente
+              Eliminar Temporalmente
             </button>
             <button
               onClick={handleDeletePerm}
@@ -172,6 +184,33 @@ function RecipeCard({
           </div>
         </div>
       )}
+{showBebida && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999,
+    }}
+  >
+    <div
+      style={{
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "5px",
+      }}
+    >
+      <Bebida onClose={handleCloseBebida} />
+    </div>
+  </div>
+)}
+
     </>
   );
 }
