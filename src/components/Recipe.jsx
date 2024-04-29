@@ -111,7 +111,7 @@ function RecipeCard({
               className="px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black txt-xs font-bold"
               onClick={handlePublish}
             >
-              Mandar
+              Pedir
             </CardItem>
             {user && user.nivel !== "user" && (
               <CardItem

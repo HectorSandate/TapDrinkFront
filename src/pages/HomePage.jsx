@@ -176,13 +176,6 @@ function HomePage() {
 
           <div className="overlay-content">
             <div className="search-page">
-              {user && (
-                <div>
-                  <p>
-                    Bienvenido, {user.name} Nivel: {user.nivel}
-                  </p>
-                </div>
-              )}
               {user && user.nivel !== "user" && (
                 <div>
                   <PinContainer
