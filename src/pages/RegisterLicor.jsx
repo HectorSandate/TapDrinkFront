@@ -1,6 +1,5 @@
 import React from "react";
 import BarNavi from "../components/HomeNav";
-import "../css/LicorForm.css";
 import LicorFormPopover from "../components/registroLicorzz";
 
 function RegisterLicor() {
@@ -10,7 +9,7 @@ function RegisterLicor() {
       <div className="bar-navigator-container ">
         <BarNavi />
       </div>
-      <div className="licor-page-container black-background">
+      <div className="licor-page-container">
         <div className="licor-container">
           <LicorFormPopover />
         </div>
