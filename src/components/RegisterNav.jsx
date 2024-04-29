@@ -1,43 +1,36 @@
 import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import logo from "../assets/images/iconOther.png";
-import { useNavigate } from 'react-router-dom'; 
-import '../css/forms.css';
 
-function BarNavi() {
+function BarNavigator() {
   const navigate = useNavigate();
-  // Estado para controlar la transparencia de la barra de navegación
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
 
-  // Efecto para establecer la transparencia al montar el componente
   useEffect(() => {
     setIsNavbarTransparent(true);
   }, []);
 
   const botonesStyle = {
-    fontFamily: 'Roboto Mono, monospace', 
+    fontFamily: 'Roboto Mono, monospace',
   };
 
-  const handleLogin= () => {
+  const handleLogin = () => {
     navigate('/login');
   };
 
   return (
-    <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''}`}>
-      <Container>
-        <Navbar.Brand>
-        <img
-            src={logo}
-            width="160"
-            height="120"
-            className="d-inline-block align-top"
-            alt="Logo"
-          />
+    <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''} py-1`}>
+      <Container className="flex justify-between items-center">
+        <Navbar.Brand className="ml-5">
+          <img src={logo} width="120" height="80" className="d-inline-block align-top" alt="Logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" style={botonesStyle}>
-          <Nav className="d-flex">
-            <Button variant="warning" className="mr-2 custom-button" style={botonesStyle}  onClick={handleLogin}>Iniciar sesion</Button>
+          <Nav className="d-flex mr-3">
+            <Button variant="warning" className="mr-1 custom-button" style={botonesStyle} onClick={handleLogin}>
+              Iniciar Sesión
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -45,4 +38,4 @@ function BarNavi() {
   );
 }
 
-export default BarNavi;
+export default BarNavigator;

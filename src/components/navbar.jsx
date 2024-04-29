@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/images/iconOther.png";
-import '../css/forms.css';
 
 function BarNavigator() {
   const navigate = useNavigate();
-
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
 
   useEffect(() => {
@@ -14,7 +12,7 @@ function BarNavigator() {
   }, []);
 
   const botonesStyle = {
-    fontFamily: 'Roboto Mono, monospace', 
+    fontFamily: 'Roboto Mono, monospace',
   };
 
   const handleRegister = () => {
@@ -22,21 +20,17 @@ function BarNavigator() {
   };
 
   return (
-    <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''}`}>
-      <Container>
-        <Navbar.Brand>
-          <img
-            src={logo}
-            width="160"
-            height="120"
-            className="d-inline-block align-top"
-            alt="Logo"
-          />
+    <Navbar expand="lg" className={`${isNavbarTransparent ? 'bg-transparent' : ''} py-1`}>
+      <Container className="flex justify-between items-center">
+        <Navbar.Brand className="ml-5">
+          <img src={logo} width="120" height="80" className="d-inline-block align-top" alt="Logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" style={botonesStyle}>
-          <Nav className="d-flex">
-            <Button variant="warning" className="mr-2 custom-button" style={botonesStyle} onClick={handleRegister}>Registrarse</Button>
+          <Nav className="d-flex mr-3">
+            <Button variant="warning" className="mr-1 custom-button" style={botonesStyle} onClick={handleRegister}>
+              Registrarse
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

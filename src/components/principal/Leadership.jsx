@@ -1,17 +1,26 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react';
-import memo from  '../../assets/Foubders/memo.jpg'
+import memo from  '../../assets/Foubders/memo.jpeg';
+import dani from  '../../assets/Foubders/dani.jpg';
+import hector from  '../../assets/Foubders/hector.jpeg';
+import diego from  '../../assets/Foubders/diego.jpeg';
+import jaz from  '../../assets/Foubders/jaz.jpeg';
+import alann from  '../../assets/Foubders/alann.jpeg';
+import nati from  '../../assets/Foubders/nat.jpeg';
+
+
+
 
 const people = [
   {
     name: 'Hector Jose Diaz Sandate',
     role: 'Co-Founder / CEO',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      hector,
   },
   {
     name: 'Héctor Guillermo Pérez Varela',
-    role: 'Co-Founder',
+    role: 'Co-Founder / Director',
     imageUrl:
       memo,
   },
@@ -19,36 +28,36 @@ const people = [
     name: 'Jazmin Roldán Guzmán',
     role: 'Co-Founder',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      jaz,
   },
   {
     name: 'Diego Martinez Ramirez',
     role: 'Co-Founder',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      diego,
   },
   {
     name: 'Natalia Ramirez Martinez',
     role: 'Co-Founder',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      nati,
   },
   {
     name: 'Alann Beltran Monarrez',
     role: 'Co-Founder',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      alann,
   },
   {
     name: 'Daniel Bretado Soriano',
-    role: 'Co-Founder',
+    role: 'Co-Founder / CEO',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      dani,
   },
 
   {
     name: 'AI',
-    role: 'Co-Founder',
+    role: 'Co-Founder / CEO',
     imageUrl:
       'https://res.cloudinary.com/dsht8f3ff/image/upload/v1697785272/claude_ai_b1pbwb.png',
   },

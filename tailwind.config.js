@@ -10,6 +10,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      colors: {
+        'warning': '#ffc107',
+      },
+      fontFamily: {
+        'roboto-mono': ['Roboto Mono', 'monospace'],
+      },
       spacing: {
         "5px": "5px",
       },

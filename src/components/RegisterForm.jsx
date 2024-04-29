@@ -2,20 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Card, Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../css/forms.css';
+import "../css/forms.css";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Estado para controlar la habilitación del botón
-  const navigate = useNavigate(); 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const navigate = useNavigate();
 
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [registerError, setRegisterError] = useState(false);
 
-  // Efecto para habilitar o deshabilitar el botón según el estado de los campos
   useEffect(() => {
     setIsButtonDisabled(!(name && email && password && confirmPassword));
   }, [name, email, password, confirmPassword, registerSuccess, registerError]);
@@ -28,7 +27,7 @@ const Register = () => {
         alert('La contraseña y su confirmación no coinciden.');
         return;
       }
-  
+
       const response = await axios.post(
         "https://taplibkback.onrender.com/api/register",
         {
@@ -62,91 +61,55 @@ const Register = () => {
       }
     }
   };
-  
-
-  const headerStyle = {
-    color: '#FFF711',
-    fontFamily: 'Roboto Mono, monospace',
-    fontSize: '30px',
-  };
-
-  const buttonStyle = {
-    fontFamily: 'Roboto Mono, monospace',
-  };
 
   return (
     <div>
-      <Card className="col-md-4" style={{ background: 'black' }}>
-        <Card.Header className="text-center"  style={headerStyle}>TapDrink</Card.Header>
-        <Card.Text className="text-center card-text-style">Welcome Back!</Card.Text>
-        <Card.Body>
-          <Form onSubmit={handleSubmit}>
-            <FloatingLabel controlId="floatingName" label="Name" className="mb-3">
-              <Form.Control
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="confirmPassword" label="Confirmar Password">
-              <Form.Control
-                type="password"
-                placeholder="Confirmar Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </FloatingLabel>
-
-            <br />
-            <Button className="col-md-12 custom-button" style={buttonStyle} variant="warning" type="submit" disabled={isButtonDisabled}>
-              Registrarse
-            </Button>
-          </Form>
-          {registerSuccess && (
-              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
-                <div role="alert" className="alert alert-success bg-success text-white h-15 w-100">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>Registro Exitoso</span>
-                </div>
-            </div> 
-            )}
-            {registerError && (
-              <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
-                <div role="alert" className="alert alert-error bg-error text-white h-15 w-100">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>Error al iregistrar</span>
-                </div>
+      <Card className="max-w-md mx-auto bg-black">
+    <Card.Header className="text-center text-warning font-roboto-mono text-3xl py-1">TapDrink</Card.Header>
+    <Card.Text className="text-center card-text-style text-base">¡Bienvenido de nuevo!</Card.Text>
+    <Card.Body>
+      <Form onSubmit={handleSubmit}>
+        <FloatingLabel controlId="floatingName" label="Nombre" className="mb-2">
+          <Form.Control type="text" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} className="text-sm" />
+        </FloatingLabel>
+        <FloatingLabel controlId="floatingEmail" label="Email" className="mb-2">
+          <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="text-sm" />
+        </FloatingLabel>
+        <FloatingLabel controlId="floatingPassword" label="Contraseña" className="mb-2">
+          <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} className="text-sm" />
+        </FloatingLabel>
+        <FloatingLabel controlId="confirmPassword" label="Confirmar Contraseña" className="mb-2">
+          <Form.Control type="password" placeholder="Confirmar Contraseña" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="text-sm" />
+        </FloatingLabel>
+        <Button className="col-md-12 custom-button btn btn-warning font-roboto-mono text-sm py-2" variant="warning" type="submit" disabled={isButtonDisabled}>
+          Registrarse
+        </Button>
+      </Form>
+      <hr className="separator-style" />
+      <div className="text-center register-text-style text-white font-roboto-mono text-sm">¿Ya tienes cuenta?</div>
+      <div className="text-center">
+        <Link to="/login" className="link-style text-yellow-500 underline text-sm cursor-pointer hover:text-warning">
+          Inicia Sesión aquí
+        </Link>
+      </div>
+    </Card.Body>
+  </Card>
+      {registerSuccess && (
+            <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+              <div role="alert" className="alert alert-success bg-success text-white h-15 w-100">
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Registro Exitoso</span>
               </div>
-            )}
-          <hr className="separator-style" />
-
-          <div className="text-center register-text-style">Ya tienes una cuenta?</div>
-
-          <div className="text-center">
-            <Link to="/" className="link-style">Inicia sesión aquí</Link>
-          </div>
-        </Card.Body>
-      </Card>
+            </div>
+          )}
+          {registerError && (
+            <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+              <div role="alert" className="alert alert-error bg-error text-white h-15 w-100">
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Error al registrar</span>
+              </div>
+            </div>
+          )}
     </div>
   );
 };

@@ -177,7 +177,7 @@ function HomePage() {
           <div className="overlay-content">
             <div className="search-page">
               {user && user.nivel !== "user" && (
-                <div>
+                <div className="ml-4 mt-2">
                   <PinContainer
                     title="/ui.aceternity.com"
                     href="https://twitter.com/mannupaaji"

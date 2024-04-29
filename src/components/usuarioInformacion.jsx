@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
-import pfp from '../assets/images/pinfuino.jpeg';
+import React, { useState, useRef } from 'react';
+import pfp from '../assets/images/user.jpg';
 import { useAuth } from './context/AuthContext';
 import Modal from "../components/modal/Modal.jsx";
 import UserUpdate from "./userUpdate.jsx";
 import '../css/card.css';
+
+import { useNavigate } from "react-router-dom";
 
 
 import { ReactComponent as EmailIcon } from "../assets/icons/email.svg";
 
 const UserPage = () => {
   const { user, logout } = useAuth();
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false); 
+  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] = useState(false);
+  const modalRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleModal = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!isModalOpen);
+  };
+
+
+  const handleLogout = () => {
+    setShowLogoutConfirmationModal(true); 
+  };
+
+  const handleCloseConfirmModal = () => {
+    setShowLogoutConfirmationModal(false);
+  };
+
+  const confirmLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   return (
@@ -46,10 +65,35 @@ const UserPage = () => {
             )}
             <button
               className="flex-1 rounded-full bg-red-600 dark:bg-red-800 hover:bg-green-800 dark:hover:bg-green-900 text-white dark:text-white px-4 py-2"
-              onClick={logout}
+              onClick={handleLogout}
             >
               Log Out
             </button>
+
+            {showLogoutConfirmationModal && (
+              <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
+                <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
+                  <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
+                    Cerrar Sesión
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 mb-12">
+                    Al confirmar saldrás de tu sesión. ¿Estás seguro?
+                  </p>
+                  <button
+                    onClick={confirmLogout} 
+                    className="block bg-red-600 text-white px-5 py-2.5 rounded-lg mr-3 focus:outline-none focus:ring-4 focus:ring-red-300"
+                  >
+                    Si, cerrar sesión
+                  </button>
+                  <button
+                    onClick={handleCloseConfirmModal}
+                    className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

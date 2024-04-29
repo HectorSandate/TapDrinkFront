@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
 import logo from "../assets/images/iconOther.png";
 import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
@@ -9,6 +9,7 @@ import { ReactComponent as LiquorIcon } from "../assets/icons/liquor.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 import { ReactComponent as ProfileIcon } from "../assets/icons/profile.svg";
 import { useAuth } from "../components/context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 import "../css/HomeNav.css";
 import Modal from "../components/modal/Modal";
 import LicorFormPopover from "../components/registroLicorzz";
@@ -18,6 +19,12 @@ const BarNavi = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showLicorModal, setShowLicorModal] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] = useState(false);
+  const modalRef = useRef(null);
+
   const { user } = useAuth();
   const { logout } = useAuth();
 
@@ -29,16 +36,25 @@ const BarNavi = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogout = () => {
-    logout();
-  };
-
   const openLicorModal = () => {
     setShowLicorModal(true);
   };
 
   const closeLicorModal = () => {
     setShowLicorModal(false);
+  };
+
+  const handleLogout = () => {
+    setShowLogoutConfirmationModal(true); 
+  };
+
+  const handleCloseConfirmModal = () => {
+    setShowLogoutConfirmationModal(false);
+  };
+
+  const confirmLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   return (
@@ -163,7 +179,6 @@ const BarNavi = () => {
             </li>
             <li>
               <Nav.Link
-                href="/"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 onClick={handleLogout}
               >
@@ -193,6 +208,31 @@ const BarNavi = () => {
           </ul>
         </div>
       </Container>
+
+      {showLogoutConfirmationModal && (
+        <div className="fixed top-0 bottom-0 right-0 left-0 bg-gray-900 bg-opacity-70 z-50 flex justify-center items-center">
+          <div ref={modalRef} className="bg-white p-12 rounded-lg max-w-md">
+            <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-12">
+              Cerrar Sesión
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-12">
+              Al confirmar saldrás de tu sesión. ¿Estás seguro?
+            </p>
+            <button
+              onClick={confirmLogout} 
+              className="block bg-red-600 text-white px-5 py-2.5 rounded-lg mr-3 focus:outline-none focus:ring-4 focus:ring-red-300"
+            >
+              Si, cerrar sesión
+            </button>
+            <button
+              onClick={handleCloseConfirmModal}
+              className="block bg-gray-200 text-black px-5 py-2.5 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 mt-3"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
 
       <Modal isOpen={showLicorModal} close={closeLicorModal}>
         <LicorFormPopover />

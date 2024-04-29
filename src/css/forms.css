@@ -31,4 +31,10 @@
   .link-style:hover {
     color: #ffc107;
   }
+
+  .black-background {
+    background-image: url('../assets/images/fondos/2.png');
+    background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+    background-position: center; /* Centra la imagen */
+  }
   
