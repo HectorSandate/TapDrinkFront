@@ -7,6 +7,11 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         // Intentar cargar el usuario desde localStorage al iniciarse el contexto
         const savedUser = localStorage.getItem('user');
+        if (!savedUser) {
+            const mockUser = { userId: "1", name: "Invitado", nivel: "admin" };
+            localStorage.setItem('user', JSON.stringify(mockUser));
+            return mockUser;
+        }
         return savedUser ? JSON.parse(savedUser) : null;
     });
 
