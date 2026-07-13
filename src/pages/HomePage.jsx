@@ -12,10 +12,20 @@ import Modal from "../components/modal/Modal.jsx";
 import InactiveRecetas from "../components/inactiveRecetas.jsx";
 import ModificarRecetaForm from "./modifcarReceta.jsx";
 
+const MOCK_RECIPE = {
+  _id: "mock-margarita",
+  image: {
+    secure_url: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=400&auto=format&fit=crop"
+  },
+  nombre: "Margarita Especial (Demo)",
+  duracion: "5 minutos",
+  procedimiento: "1. Escarchar la copa con sal. 2. Mezclar 2 oz de tequila, 1 oz de triple sec y 1 oz de jugo de limón con hielo. 3. Agitar y servir."
+};
+
 function HomePage() {
   const { user } = useAuth(); // Usando el contexto para obtener la información del usuario
 
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([MOCK_RECIPE]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [client, setClient] = useState(null);
 
@@ -54,7 +64,7 @@ function HomePage() {
       .then((data) => {
         console.log("Data from API:", data);
         if (Array.isArray(data.recetas)) {
-          setRecipes(data.recetas);
+          setRecipes([MOCK_RECIPE, ...data.recetas]);
         } else {
           console.error("Recetas array not found in data:", data);
         }
@@ -84,7 +94,7 @@ function HomePage() {
       .then((data) => {
         console.log("Data from API:", data);
         if (Array.isArray(data.recetas)) {
-          setRecipes(data.recetas);
+          setRecipes([MOCK_RECIPE, ...data.recetas]);
         } else {
           console.error("Recetas array not found in data:", data);
         }
@@ -132,7 +142,7 @@ function HomePage() {
       .then((data) => {
         console.log("Data from API:", data);
         if (Array.isArray(data)) {
-          setRecipes(data);
+          setRecipes([MOCK_RECIPE, ...data]);
         } else {
           console.error("Recetas array not found in data:", data);
         }
@@ -147,7 +157,7 @@ function HomePage() {
       .then((data) => {
         console.log("Data from API:", data);
         if (Array.isArray(data.recetas)) {
-          setRecipes(data.recetas);
+          setRecipes([MOCK_RECIPE, ...data.recetas]);
         } else {
           console.error("Recetas array not found in data:", data);
         }
